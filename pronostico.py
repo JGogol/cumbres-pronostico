@@ -9,6 +9,7 @@ import json, os, sys, urllib.request, urllib.parse, datetime
 from PIL import Image, ImageDraw, ImageFont
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, AQUI)
 SALIDA = os.path.join(AQUI, 'site', 'img')
 TZ = 'America/Argentina/Mendoza'
 DIAS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
@@ -40,7 +41,7 @@ def pedir(rutas):
          'daily': 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,'
                   'precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max',
          'hourly': 'freezing_level_height',
-         'timezone': TZ, 'forecast_days': 2, 'wind_speed_unit': 'kmh'}
+         'timezone': TZ, 'forecast_days': 16, 'wind_speed_unit': 'kmh'}
     url = 'https://api.open-meteo.com/v1/forecast?' + urllib.parse.urlencode(q)
     r = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=120))
     return r if isinstance(r, list) else [r]
@@ -54,36 +55,57 @@ def color_t(t):
     return (245, 140, 70)
 
 
+CORTA = ['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom']
+
+
+def tenue(c, f):
+    return tuple(int(30 + (v - 30) * f) for v in c)
+
+
 def dibujar(ruta, d, ahora):
     D = d['daily']; H = d['hourly']
-    W, Hh = 760, 250
-    im = Image.new('RGB', (W, Hh), (30, 30, 30)); g = ImageDraw.Draw(im)
-    F, FB, FS, FT = fuente(15), fuente(17, True), fuente(12), fuente(26, True)
+    nd = len(D['time'])
+    W, RH, TOP = 600, 27, 84
+    alto = TOP + nd * RH + 2 * 24 + 74
+    im = Image.new('RGB', (W, alto), (30, 30, 30)); g = ImageDraw.Draw(im)
+    F, FB, FS, FH = fuente(17), fuente(18, True), fuente(13), fuente(13, True)
     lugar = 'la cumbre' if ruta['tipo'] == 'Cumbre' else 'el punto más alto'
-    g.text((14, 10), f"Pronóstico en {lugar} · {ruta['alt']} msnm", font=FB, fill=(240, 240, 240))
-    for k in range(2):
-        x0 = 14 + k * 373
+    g.text((14, 10), f"Pronóstico {nd} días en {lugar} · {ruta['alt']} msnm", font=FB, fill=(240, 240, 240))
+    g.text((14, 34), f"Actualizado {ahora:%d/%m %H:%M} (hora de Mendoza)", font=FS, fill=(170, 170, 170))
+    X = [14, 128, 186, 244, 340, 490]
+    for x, t in zip(X, ['Día', 'Máx', 'Mín', 'Ráfagas', 'Precipitación', '0 °C desde']):
+        g.text((x, 60), t, font=FH, fill=(150, 150, 150))
+    y = TOP
+    for k in range(nd):
+        if k in (2, 7):
+            txt = 'Días 3 a 7 · confiabilidad aceptable' if k == 2 else 'Días 8 a 16 · solo tendencia: puede cambiar mucho'
+            g.line((14, y + 11, W - 14, y + 11), fill=(70, 70, 70))
+            tw = g.textlength(txt, font=FS); g.rectangle((W / 2 - tw / 2 - 8, y + 2, W / 2 + tw / 2 + 8, y + 20), fill=(30, 30, 30))
+            g.text((W / 2 - tw / 2, y + 3), txt, font=FS, fill=(200, 170, 90) if k == 2 else (200, 120, 90)); y += 24
+        f = 1.0 if k < 2 else (0.85 if k < 7 else 0.6)
+        if k < 2: g.rounded_rectangle((8, y, W - 8, y + RH - 2), radius=6, fill=(44, 52, 64))
         fecha = datetime.date.fromisoformat(D['time'][k])
-        g.rounded_rectangle((x0, 40, x0 + 360, 200), radius=10, fill=(42, 42, 42))
-        g.text((x0 + 12, 48), f"{'Hoy' if k == 0 else 'Mañana'} · {DIAS[fecha.weekday()]} {fecha:%d/%m}", font=FB, fill=(90, 170, 255))
-        g.text((x0 + 12, 72), WMO.get(D['weather_code'][k], ''), font=F, fill=(220, 220, 220))
+        dia = ('Hoy ' if k == 0 else 'Mañana ' if k == 1 else '') + f"{CORTA[fecha.weekday()]} {fecha:%d}"
+        g.text((X[0], y + 3), dia, font=F, fill=tenue((235, 235, 235), f))
         tx, tn = D['temperature_2m_max'][k], D['temperature_2m_min'][k]
-        g.text((x0 + 12, 96), f"{round(tx)}°", font=FT, fill=color_t(tx))
-        g.text((x0 + 70, 106), 'máx', font=FS, fill=(170, 170, 170))
-        g.text((x0 + 112, 96), f"{round(tn)}°", font=FT, fill=color_t(tn))
-        g.text((x0 + 170, 106), 'mín', font=FS, fill=(170, 170, 170))
+        if tx is not None: g.text((X[1], y + 3), f"{round(tx)}°", font=F, fill=tenue(color_t(tx), f))
+        if tn is not None: g.text((X[2], y + 3), f"{round(tn)}°", font=F, fill=tenue(color_t(tn), f))
         raf = D['wind_gusts_10m_max'][k]
-        g.text((x0 + 12, 136), f"Ráfagas de viento hasta {round(raf)} km/h" + (' · fuerte' if raf >= 60 else ''), font=F,
-               fill=(255, 110, 110) if raf >= 60 else (220, 220, 220))
-        pr, nv, pp = D['precipitation_sum'][k] or 0, D['snowfall_sum'][k] or 0, D['precipitation_probability_max'][k]
-        txt = f"Nieve {nv:.0f} cm" if nv >= 0.5 else (f"Lluvia {pr:.0f} mm" if pr >= 0.5 else 'Sin precipitación')
-        if pp is not None: txt += f" · prob. {pp}%"
-        g.text((x0 + 12, 156), txt, font=F, fill=(220, 220, 220))
+        if raf is not None:
+            g.text((X[3], y + 3), f"{round(raf)} km/h", font=F, fill=tenue((255, 110, 110) if raf >= 60 else (220, 220, 220), f))
+        pr, nv = D['precipitation_sum'][k] or 0, D['snowfall_sum'][k] or 0
+        tor = (D['weather_code'][k] or 0) >= 95
+        txt = f"nieve {nv:.0f} cm" if nv >= 0.5 else (f"lluvia {pr:.0f} mm" if pr >= 0.5 else '—')
+        if tor: txt = 'tormenta' + ('' if txt == '—' else ', ' + txt.split()[0])
+        g.text((X[4], y + 3), txt, font=F, fill=tenue((150, 210, 255) if nv >= 0.5 else (255, 200, 90) if tor else (220, 220, 220), f))
         fl = [v for t, v in zip(H['time'], H['freezing_level_height']) if t.startswith(D['time'][k]) and v is not None]
-        if fl:
-            g.text((x0 + 12, 176), f"Isoterma 0 °C entre {round(min(fl), -2):.0f} y {round(max(fl), -2):.0f} m", font=F, fill=(180, 210, 255))
-    g.text((14, 210), f"Actualizado {ahora:%d/%m %H:%M} (hora de Mendoza) · modelo de pronóstico Open-Meteo, a {ruta['alt']} m de altura.", font=FS, fill=(170, 170, 170))
-    g.text((14, 228), 'Orientativo: confirmalo en Windy u otro pronóstico de montaña antes de salir. Cumbres Digitales', font=FS, fill=(170, 170, 170))
+        if fl: g.text((X[5], y + 3), f"{round(min(fl), -2):.0f} m", font=F, fill=tenue((180, 210, 255), f))
+        y += RH
+    y += 8
+    for t in [f"Modelo de pronóstico Open-Meteo, calculado a {ruta['alt']} m de altura. Las ráfagas",
+              'varían mucho entre modelos. Rojo: ráfagas de 60 km/h o más. "0 °C desde": altura',
+              'mínima de la isoterma 0 °C en el día. Orientativo: confirmalo antes de salir.']:
+        g.text((14, y), t, font=FS, fill=(165, 165, 165)); y += 18
     return im
 
 
@@ -98,6 +120,8 @@ def main():
         lote = rutas[i:i + 40]
         for ruta, d in zip(lote, pedir(lote)):
             dibujar(ruta, d, ahora).save(os.path.join(SALIDA, f"{ruta['n']:03d}.png"), optimize=True)
+            from animado import gif
+            gif(ruta, d, ahora, os.path.join(SALIDA, f"{ruta['n']:03d}.gif"))
             ok += 1
     open(os.path.join(AQUI, 'site', 'index.html'), 'w', encoding='utf-8').write(
         '<!doctype html><meta charset="utf-8"><title>Pronósticos Cumbres Digitales</title>'
