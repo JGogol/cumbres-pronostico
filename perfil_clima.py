@@ -12,7 +12,8 @@ DIAS_PRONO = 7
 def pedir_puntos(pts):
     q = {'latitude': ','.join(str(p[1]) for p in pts), 'longitude': ','.join(str(p[2]) for p in pts),
          'elevation': ','.join(str(p[3]) for p in pts),
-         'hourly': 'temperature_2m,wind_gusts_10m,snowfall,freezing_level_height',
+         'hourly': 'temperature_2m,wind_gusts_10m,snowfall,freezing_level_height,precipitation,weather_code',
+         'daily': 'sunrise,sunset',
          'timezone': TZ, 'forecast_days': DIAS_PRONO, 'wind_speed_unit': 'kmh'}
     url = 'https://api.open-meteo.com/v1/forecast?' + urllib.parse.urlencode(q)
     r = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=120))

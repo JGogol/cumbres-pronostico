@@ -23,6 +23,13 @@ def col(t):
     return ESC2[-1][1]
 
 
+NOTAS = [('Excelente', (40, 170, 80)), ('Buena', (130, 195, 70)), ('Regular', (225, 190, 60)),
+         ('Mala', (235, 130, 50)), ('Muy mala', (210, 50, 50))]
+
+
+PLURAL = ['excelentes', 'buenas', 'regulares', 'malas', 'muy malas']
+
+
 def col_viento(v):
     return (70, 170, 90) if v < 30 else (225, 190, 60) if v < 60 else (225, 70, 60)
 
@@ -50,7 +57,44 @@ class Datos:
         self.T = [[v if v is not None else 0 for v in x['hourly']['temperature_2m'][:nh]] for x in d]
         self.nieve = [v or 0 for v in d[-1]['hourly']['snowfall'][:nh]]
         self.raf = [v or 0 for v in d[-1]['hourly']['wind_gusts_10m'][:nh]]
+        self.G = [[v or 0 for v in x['hourly']['wind_gusts_10m'][:nh]] for x in d]
+        self.lluvia = [max(x['hourly']['precipitation'][h] or 0 for x in d) for h in range(nh)]
+        self.wcode = [max(x['hourly']['weather_code'][h] or 0 for x in d) for h in range(nh)]
+        self.sol = {t: (int(a[11:13]) + int(a[14:16]) / 60, int(b[11:13]) + int(b[14:16]) / 60)
+                    for t, a, b in zip(d[-1]['daily']['time'], d[-1]['daily']['sunrise'], d[-1]['daily']['sunset'])}
         self.a0, self.a1 = self.alts[0], self.alts[-1]
+
+    def nota_hora(self, h):
+        """0 excelente · 1 bueno · 2 regular · 3 malo · 4 muy malo (peor condición en toda la ruta)."""
+        g = self.raf[h]; p = self.lluvia[h]; w = self.wcode[h]; t = self.T[-1][h]
+        sens = t - 0.2 * g  # aproximación simple de sensación térmica en la cumbre
+        if w >= 95 or g > 80 or self.nieve[h] >= 1.5: return 4
+        if g > 60 or p >= 0.5 or sens < -15: return 3
+        if g > 45 or p > 0 or w in (71, 73, 75, 85, 86, 61, 63, 65, 80, 81, 82): return 2
+        if g > 30: return 1
+        return 0
+
+    def mejor_franja(self, fecha, horas_ruta):
+        """Mejor ventana de luz del largo de la ruta: (nota, hora_inicio, hora_fin) o None."""
+        if not horas_ruta: return None
+        sale, pone = self.sol.get(fecha, (7, 19))
+        idx = [j for j, h in enumerate(self.horas) if h[:10] == fecha]
+        dur = max(1, round(horas_ruta)); mejor = None
+        for i0 in range(len(idx) - dur + 1):
+            hi = int(self.horas[idx[i0]][11:13])
+            if hi < sale - 0.25 or hi + dur > pone + 0.25: continue
+            nota = max(self.nota_hora(idx[i0 + k]) for k in range(dur))
+            if mejor is None or nota < mejor[0]: mejor = (nota, hi, hi + dur)
+        return mejor
+
+    def viento(self, h, umbral=60):
+        g = [self.G[i][h] for i in range(len(self.alts))]
+        if max(g) < umbral: return None
+        if min(g) >= umbral: return 'abajo'
+        for i in range(len(self.alts) - 1):
+            if g[i] < umbral <= g[i + 1]:
+                return self.alts[i] + (self.alts[i + 1] - self.alts[i]) * (umbral - g[i]) / ((g[i + 1] - g[i]) or 1)
+        return None
 
     def temp(self, h, a):
         al, T = self.alts, self.T
@@ -94,6 +138,27 @@ def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
                     xb = prev[0] + (x - prev[0]) * (t + 0.3); yb = prev[1] + (y - prev[1]) * (t + 0.3)
                     g.line((xa, ya, xb, yb), fill=(255, 255, 255), width=2)
         prev = (x, y, est)
+    # línea de viento fuerte: altura desde donde las ráfagas superan 60 km/h
+    prev = None
+    for h in range(h0, h1):
+        x = x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0)
+        z = D.viento(h)
+        if z is None: prev = None; continue
+        y = y1 - 1 if z == 'abajo' else y1 - (z - a0) / (a1 - a0) * (y1 - y0)
+        if prev:
+            for t in (0.0, 0.5):
+                xa = prev[0] + (x - prev[0]) * t; ya = prev[1] + (y - prev[1]) * t
+                xb = prev[0] + (x - prev[0]) * (t + 0.35); yb = prev[1] + (y - prev[1]) * (t + 0.35)
+                g.line((xa, ya, xb, yb), fill=(235, 60, 60), width=3)
+        prev = (x, y)
+    # escala de altura: guías cada 250 m
+    paso = 250 if a1 - a0 <= 2000 else 500
+    for a in range((int(a0) // paso + 1) * paso, int(a1), paso):
+        y = y1 - (a - a0) / (a1 - a0) * (y1 - y0)
+        cerca = min(a - a0, a1 - a) < (a1 - a0) * 0.09
+        for xx in range(int(x0), int(x1), 6): g.point((xx, y), fill=(255, 255, 255))
+        g.line((x0 - 4, y, x0, y), fill=(200, 200, 200))
+        if not cerca: g.text((x0 - 32, y - 7), f'{a}', font=fuente(11), fill=(170, 170, 170))
     for h in range(h0 + 1, h1):
         if D.horas[h][11:13] == '00':
             x = x0 + (h - h0) * (x1 - x0) / (h1 - h0); g.line((x, y0, x, y1 + 18), fill=(25, 25, 25), width=2)
@@ -111,10 +176,14 @@ def franja_viento(g, D, x0, y0, x1, h0, h1, F, numeros_cada=None):
 
 
 def leyendas(g, W, y, F, FS):
-    g.text((14, y), '— 0 °C', font=FS, fill=(230, 230, 230))
-    g.text((64, y), '- - no hiela en la ruta', font=FS, fill=(200, 200, 200))
-    g.text((200, y), '* nieve', font=FS, fill=(220, 240, 255))
-    x = 262
+    g.text((14, y), '— 0 °C (punteada: no hiela)', font=FS, fill=(230, 230, 230))
+    g.text((190, y), '- - ráfagas ≥60 arriba de', font=FS, fill=(240, 90, 90))
+    g.text((350, y), '* nieve', font=FS, fill=(220, 240, 255))
+    x = 14; y += 18
+    for nombre, c in NOTAS:
+        g.rectangle((x, y + 2, x + 10, y + 12), fill=c); g.text((x + 13, y), nombre, font=FS, fill=(200, 200, 200))
+        x += 22 + g.textlength(nombre, font=FS)
+    y += 18; x = 14
     g.text((x, y), 'Ráfagas en la cumbre:', font=FS, fill=(200, 200, 200)); x += 132
     for c, t in (((70, 170, 90), '<30'), ((225, 190, 60), '30-60'), ((225, 70, 60), '>60 km/h')):
         g.rectangle((x, y + 2, x + 10, y + 12), fill=c); g.text((x + 13, y), t, font=FS, fill=(200, 200, 200))
@@ -132,13 +201,13 @@ def ejes_altura(g, D, x, y0, y1, FS, cumbre):
 
 
 def semana_png(ruta, D, ahora, destino):
-    W, H = 600, 420
+    W, H = 600, 470
     F, FB, FS = fuente(13), fuente(17, True), fuente(12)
     g_im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(g_im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
     g.text((14, 8), ruta['nombre'][:44], font=FB, fill=(240, 240, 240))
-    g.text((14, 32), 'Temperatura por altura y hora · próximos 7 días · buscá las ventanas de buen tiempo', font=FS, fill=(170, 170, 170))
-    x0, x1, y0, y1 = 58, W - 14, 92, 282
+    g.text((14, 30), 'Próximos 7 días en toda la ruta · condiciones pronosticadas en la mejor franja de luz', font=FS, fill=(170, 170, 170))
+    x0, x1, y0, y1 = 58, W - 14, 118, 308
     nh = len(D.horas)
     panel(g, D, x0, y0, x1, y1, 0, nh, 3)
     ejes_altura(g, D, 4, y0, y1, FS, cumbre)
@@ -149,9 +218,15 @@ def semana_png(ruta, D, ahora, destino):
         hs = [j for j, h in enumerate(D.horas) if h[:10] == fe]
         tc = [D.T[-1][j] for j in hs]; tb = [D.T[0][j] for j in hs]
         lab = ('Hoy' if i == 0 else 'Mañ.' if i == 1 else CORTA[dd.weekday()]) + f' {dd:%d}'
-        g.text((xc - g.textlength(lab, font=F) / 2, y0 - 36), lab, font=F, fill=(235, 235, 235) if i < 2 else (200, 200, 200) if i < 5 else (160, 160, 160))
+        g.text((xc - g.textlength(lab, font=F) / 2, y0 - 34), lab, font=F, fill=(235, 235, 235) if i < 2 else (200, 200, 200) if i < 5 else (160, 160, 160))
         s = f'{round(max(tc))}°/{round(min(tc))}°'; g.text((xc - g.textlength(s, font=FS) / 2, y0 - 18), s, font=FS, fill=(170, 210, 255))
         s = f'{round(max(tb))}°/{round(min(tb))}°'; g.text((xc - g.textlength(s, font=FS) / 2, y1 - 16), s, font=FS, fill=(25, 25, 25))
+        mf = D.mejor_franja(fe, ruta.get('horas'))
+        if mf:
+            nombre, c = NOTAS[mf[0]]; t1 = nombre; t2 = f'{mf[1]}-{mf[2]} h'
+            g.rounded_rectangle((xc - cw / 2 + 3, y0 - 58, xc + cw / 2 - 3, y0 - 38), radius=5, fill=c)
+            g.text((xc - g.textlength(t1, font=FS) / 2, y0 - 56), t1, font=FS, fill=(20, 20, 20))
+            g.text((xc - g.textlength(t2, font=FS) / 2, y0 - 72), t2, font=FS, fill=(200, 200, 200))
         nv = sum(D.nieve[j] for j in hs)
         if nv >= 0.5: g.text((xc - 20, y0 + 4), f'* {nv:.0f} cm', font=FS, fill=(255, 255, 255), stroke_width=2, stroke_fill=(40, 60, 110))
     franja_viento(g, D, x0, y1 + 4, x1, 0, nh, FS)
@@ -160,14 +235,14 @@ def semana_png(ruta, D, ahora, destino):
         xc = x0 + (i + 0.5) * cw; s = f'máx {round(rm)}'
         g.text((xc - g.textlength(s, font=FS) / 2, y1 + 5), s, font=FS, fill=(20, 20, 20))
     g.text((4, y1 + 5), 'viento', font=FS, fill=(200, 200, 200))
-    g.text((x0, y1 + 24), 'arriba: máx/mín en la cumbre · abajo: en la largada · días 6-7: solo tendencia', font=FS, fill=(150, 150, 150))
+    g.text((x0, y1 + 24), f"franja = {ruta.get('horas') or '?'} h de recorrido con luz · arriba máx/mín cumbre, abajo largada", font=FS, fill=(150, 150, 150))
     leyendas(g, W, y1 + 46, F, FS)
     g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     marca(g_im, (x0, y0, x1, y1)).save(destino, optimize=True)
 
 
 def detalle_png(ruta, D, ahora, destino):
-    W, H = 600, 572
+    W, H = 600, 668
     cajas = []
     F, FB, FS, FG = fuente(13), fuente(17, True), fuente(12), fuente(22, True)
     im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(im)
@@ -184,7 +259,16 @@ def detalle_png(ruta, D, ahora, destino):
         nv = sum(D.nieve[h0:h1]); rm = max(D.raf[h0:h1])
         info = f"Ráfagas en la cumbre hasta {round(rm)} km/h" + (f" · nieve {nv:.0f} cm" if nv >= 0.5 else '')
         g.text((14 + g.textlength(nom, font=FG) + 12, y + 8), info, font=FS, fill=(255, 130, 120) if rm >= 60 else (210, 210, 210))
-        x0, x1, y0, y1 = 58, W - 14, y + 34, y + 174
+        x0, x1, y0, y1 = 58, W - 14, y + 60, y + 200
+        for hh in range(24):
+            xa = x0 + hh * (x1 - x0) / 24; xb = x0 + (hh + 1) * (x1 - x0) / 24
+            g.rectangle((xa, y0 - 14, xb - 1, y0 - 4), fill=NOTAS[D.nota_hora(h0 + hh)][1])
+        mf = D.mejor_franja(fe, ruta.get('horas'))
+        if mf:
+            xa = x0 + mf[1] * (x1 - x0) / 24; xb = x0 + mf[2] * (x1 - x0) / 24
+            g.rectangle((xa, y0 - 16, xb, y0 - 2), outline=(255, 255, 255), width=2)
+            txt = f"Mejor franja {mf[1]}–{mf[2]} h: condiciones {PLURAL[mf[0]]}"
+            g.text((14, y + 30), txt, font=F, fill=NOTAS[mf[0]][1])
         panel(g, D, x0, y0, x1, y1, h0, h1, 3); cajas.append((x0, y0, x1, y1))
         ejes_altura(g, D, 4, y0, y1, FS, cumbre)
         for hh in range(1, 24, 3):

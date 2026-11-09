@@ -5,7 +5,9 @@
 "lat": -32.8428,
 "lon": -69.0328,
 "alt": 2518,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 2,
@@ -13,7 +15,9 @@
 "lat": -32.9232,
 "lon": -69.3487,
 "alt": 3000,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 3,
@@ -21,7 +25,9 @@
 "lat": -32.9462,
 "lon": -69.2535,
 "alt": 2139,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 4,
@@ -29,7 +35,9 @@
 "lat": -33.6209,
 "lon": -69.4915,
 "alt": 2646,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 5,
@@ -37,7 +45,9 @@
 "lat": -32.4943,
 "lon": -69.0365,
 "alt": 2500,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.0,
+"varios_dias": false
 },
 {
 "n": 6,
@@ -45,7 +55,9 @@
 "lat": -33.0524,
 "lon": -69.3956,
 "alt": 4200,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 7,
@@ -53,7 +65,9 @@
 "lat": -32.9895,
 "lon": -69.0759,
 "alt": 2100,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.6,
+"varios_dias": false
 },
 {
 "n": 8,
@@ -61,7 +75,9 @@
 "lat": -32.9979,
 "lon": -69.0663,
 "alt": 2140,
-"tipo": "Punto más alto"
+"tipo": "Punto más alto",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 9,
@@ -69,7 +85,9 @@
 "lat": -32.9807,
 "lon": -69.0478,
 "alt": 2190,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.0,
+"varios_dias": false
 },
 {
 "n": 10,
@@ -77,7 +95,9 @@
 "lat": -32.9592,
 "lon": -69.071,
 "alt": 2576,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 11,
@@ -85,7 +105,9 @@
 "lat": -32.9659,
 "lon": -69.0636,
 "alt": 2414,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 12,
@@ -93,7 +115,9 @@
 "lat": -32.9688,
 "lon": -69.0614,
 "alt": 2400,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.3,
+"varios_dias": false
 },
 {
 "n": 13,
@@ -101,7 +125,9 @@
 "lat": -32.9869,
 "lon": -69.0653,
 "alt": 1950,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.3,
+"varios_dias": false
 },
 {
 "n": 14,
@@ -109,7 +135,9 @@
 "lat": -32.9823,
 "lon": -69.0664,
 "alt": 1930,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.3,
+"varios_dias": false
 },
 {
 "n": 15,
@@ -117,7 +145,9 @@
 "lat": -32.9811,
 "lon": -69.0694,
 "alt": 1990,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.5,
+"varios_dias": false
 },
 {
 "n": 16,
@@ -125,7 +155,9 @@
 "lat": -32.8364,
 "lon": -68.9346,
 "alt": 1661,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.0,
+"varios_dias": false
 },
 {
 "n": 17,
@@ -133,7 +165,9 @@
 "lat": -32.9134,
 "lon": -69.0568,
 "alt": 2035,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.5,
+"varios_dias": false
 },
 {
 "n": 18,
@@ -141,7 +175,9 @@
 "lat": -32.8251,
 "lon": -68.9542,
 "alt": 1670,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.9,
+"varios_dias": false
 },
 {
 "n": 19,
@@ -149,7 +185,9 @@
 "lat": -32.8178,
 "lon": -68.9814,
 "alt": 2092,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 20,
@@ -157,7 +195,9 @@
 "lat": -32.8083,
 "lon": -68.9945,
 "alt": 2192,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 21,
@@ -165,7 +205,9 @@
 "lat": -32.9212,
 "lon": -69.3485,
 "alt": 2990,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 22,
@@ -173,7 +215,9 @@
 "lat": -32.9223,
 "lon": -69.3521,
 "alt": 3280,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 23,
@@ -181,7 +225,9 @@
 "lat": -32.9238,
 "lon": -69.3651,
 "alt": 3650,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 24,
@@ -189,7 +235,9 @@
 "lat": -33.2928,
 "lon": -68.7526,
 "alt": 850,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 25,
@@ -197,7 +245,9 @@
 "lat": -32.8836,
 "lon": -68.9388,
 "alt": 1115,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.0,
+"varios_dias": false
 },
 {
 "n": 26,
@@ -205,7 +255,9 @@
 "lat": -33.0093,
 "lon": -69.0773,
 "alt": 2090,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.3,
+"varios_dias": false
 },
 {
 "n": 27,
@@ -213,7 +265,9 @@
 "lat": -32.9777,
 "lon": -69.0854,
 "alt": 2610,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 28,
@@ -221,7 +275,9 @@
 "lat": -32.9734,
 "lon": -69.0852,
 "alt": 2660,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.2,
+"varios_dias": false
 },
 {
 "n": 29,
@@ -229,7 +285,9 @@
 "lat": -33.0671,
 "lon": -68.479,
 "alt": 690,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.5,
+"varios_dias": false
 },
 {
 "n": 30,
@@ -237,7 +295,9 @@
 "lat": -32.9696,
 "lon": -68.6868,
 "alt": 710,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.2,
+"varios_dias": false
 },
 {
 "n": 31,
@@ -245,7 +305,9 @@
 "lat": -32.6208,
 "lon": -69.2654,
 "alt": 2329,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.7,
+"varios_dias": false
 },
 {
 "n": 32,
@@ -253,7 +315,9 @@
 "lat": -33.0681,
 "lon": -69.4006,
 "alt": 4405,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 33,
@@ -261,7 +325,9 @@
 "lat": -32.7499,
 "lon": -70.1059,
 "alt": 3410,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 34,
@@ -269,7 +335,9 @@
 "lat": -33.0181,
 "lon": -69.2994,
 "alt": 2150,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 35,
@@ -277,7 +345,9 @@
 "lat": -33.8053,
 "lon": -68.9179,
 "alt": 1072,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 36,
@@ -285,7 +355,9 @@
 "lat": -32.8595,
 "lon": -69.3108,
 "alt": 3065,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.5,
+"varios_dias": false
 },
 {
 "n": 37,
@@ -293,7 +365,9 @@
 "lat": -32.6553,
 "lon": -69.1833,
 "alt": 3100,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.2,
+"varios_dias": false
 },
 {
 "n": 38,
@@ -301,7 +375,9 @@
 "lat": -33.0612,
 "lon": -68.4736,
 "alt": 670,
-"tipo": "Punto más alto"
+"tipo": "Punto más alto",
+"horas": 8.5,
+"varios_dias": false
 },
 {
 "n": 39,
@@ -309,7 +385,9 @@
 "lat": -33.6486,
 "lon": -69.5359,
 "alt": 3385,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.0,
+"varios_dias": false
 },
 {
 "n": 40,
@@ -317,7 +395,9 @@
 "lat": -33.6698,
 "lon": -69.557,
 "alt": 4023,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.5,
+"varios_dias": false
 },
 {
 "n": 41,
@@ -325,7 +405,9 @@
 "lat": -32.9209,
 "lon": -69.3196,
 "alt": 2875,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 42,
@@ -333,7 +415,9 @@
 "lat": -32.9203,
 "lon": -69.32,
 "alt": 2877,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 43,
@@ -341,7 +425,9 @@
 "lat": -32.6878,
 "lon": -69.9644,
 "alt": 4200,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 10.0,
+"varios_dias": false
 },
 {
 "n": 44,
@@ -349,7 +435,9 @@
 "lat": -32.9866,
 "lon": -69.3514,
 "alt": 2650,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 45,
@@ -357,7 +445,9 @@
 "lat": -33.0533,
 "lon": -69.2858,
 "alt": 2305,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.2,
+"varios_dias": false
 },
 {
 "n": 46,
@@ -365,7 +455,9 @@
 "lat": -32.9903,
 "lon": -69.4266,
 "alt": 4665,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 47,
@@ -373,7 +465,9 @@
 "lat": -32.4722,
 "lon": -69.1106,
 "alt": 3150,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.3,
+"varios_dias": false
 },
 {
 "n": 48,
@@ -381,7 +475,9 @@
 "lat": -32.4599,
 "lon": -69.1121,
 "alt": 3320,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.0,
+"varios_dias": false
 },
 {
 "n": 49,
@@ -389,7 +485,9 @@
 "lat": -33.0075,
 "lon": -69.4192,
 "alt": 3750,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.8,
+"varios_dias": false
 },
 {
 "n": 50,
@@ -397,7 +495,9 @@
 "lat": -35.1895,
 "lon": -70.0024,
 "alt": 2015,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.7,
+"varios_dias": false
 },
 {
 "n": 51,
@@ -405,7 +505,9 @@
 "lat": -35.1551,
 "lon": -69.939,
 "alt": 1930,
-"tipo": "Punto más alto"
+"tipo": "Punto más alto",
+"horas": 1.3,
+"varios_dias": false
 },
 {
 "n": 52,
@@ -413,7 +515,9 @@
 "lat": -35.1439,
 "lon": -69.8677,
 "alt": 2140,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.7,
+"varios_dias": false
 },
 {
 "n": 53,
@@ -421,7 +525,9 @@
 "lat": -33.621,
 "lon": -69.5906,
 "alt": 3951,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 54,
@@ -429,7 +535,9 @@
 "lat": -35.0154,
 "lon": -68.6691,
 "alt": 1311,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.0,
+"varios_dias": false
 },
 {
 "n": 55,
@@ -437,7 +545,9 @@
 "lat": -33.271,
 "lon": -69.1173,
 "alt": 1423,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 9.0,
+"varios_dias": false
 },
 {
 "n": 56,
@@ -445,7 +555,9 @@
 "lat": -32.9624,
 "lon": -69.3509,
 "alt": 3392,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.5,
+"varios_dias": false
 },
 {
 "n": 57,
@@ -453,7 +565,9 @@
 "lat": -33.6866,
 "lon": -69.5611,
 "alt": 4583,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.0,
+"varios_dias": false
 },
 {
 "n": 58,
@@ -461,7 +575,9 @@
 "lat": -32.7495,
 "lon": -70.1184,
 "alt": 3728,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 59,
@@ -469,7 +585,9 @@
 "lat": -32.8237,
 "lon": -70.0738,
 "alt": 3882,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 60,
@@ -477,7 +595,9 @@
 "lat": -33.622,
 "lon": -69.6074,
 "alt": 4343,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.0,
+"varios_dias": false
 },
 {
 "n": 61,
@@ -485,7 +605,9 @@
 "lat": -32.7923,
 "lon": -69.3717,
 "alt": 3586,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 8.0,
+"varios_dias": false
 },
 {
 "n": 62,
@@ -493,7 +615,9 @@
 "lat": -32.839,
 "lon": -69.3417,
 "alt": 2340,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 63,
@@ -501,7 +625,9 @@
 "lat": -32.8944,
 "lon": -69.3208,
 "alt": 2662,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 64,
@@ -509,7 +635,9 @@
 "lat": -33.0087,
 "lon": -69.4029,
 "alt": 4100,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.0,
+"varios_dias": false
 },
 {
 "n": 65,
@@ -517,7 +645,9 @@
 "lat": -33.0388,
 "lon": -69.3706,
 "alt": 3420,
-"tipo": "Punto más alto"
+"tipo": "Punto más alto",
+"horas": null,
+"varios_dias": true
 },
 {
 "n": 66,
@@ -525,7 +655,9 @@
 "lat": -34.597,
 "lon": -69.3047,
 "alt": 1836,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.0,
+"varios_dias": false
 },
 {
 "n": 67,
@@ -533,7 +665,9 @@
 "lat": -32.5547,
 "lon": -68.8005,
 "alt": 870,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 68,
@@ -541,7 +675,9 @@
 "lat": -33.3532,
 "lon": -69.3865,
 "alt": 1820,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 69,
@@ -549,7 +685,9 @@
 "lat": -34.6338,
 "lon": -69.0856,
 "alt": 2325,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 70,
@@ -557,7 +695,9 @@
 "lat": -34.6613,
 "lon": -68.9259,
 "alt": 1630,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 71,
@@ -565,7 +705,9 @@
 "lat": -32.8473,
 "lon": -69.2052,
 "alt": 1894,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 72,
@@ -573,7 +715,9 @@
 "lat": -32.3948,
 "lon": -69.5825,
 "alt": 3023,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": null,
+"varios_dias": true
 },
 {
 "n": 73,
@@ -581,7 +725,9 @@
 "lat": -32.9364,
 "lon": -69.4056,
 "alt": 4342,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 74,
@@ -589,7 +735,9 @@
 "lat": -33.0681,
 "lon": -69.4005,
 "alt": 4406,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": null,
+"varios_dias": true
 },
 {
 "n": 75,
@@ -597,7 +745,9 @@
 "lat": -34.2233,
 "lon": -69.5143,
 "alt": 3750,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 76,
@@ -605,7 +755,9 @@
 "lat": -34.7286,
 "lon": -69.6514,
 "alt": 2717,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.2,
+"varios_dias": false
 },
 {
 "n": 77,
@@ -613,7 +765,9 @@
 "lat": -32.8806,
 "lon": -69.9209,
 "alt": 3530,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 78,
@@ -621,7 +775,9 @@
 "lat": -32.9979,
 "lon": -69.4021,
 "alt": 4817,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 6.5,
+"varios_dias": false
 },
 {
 "n": 79,
@@ -629,7 +785,9 @@
 "lat": -32.5805,
 "lon": -69.5138,
 "alt": 2330,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 80,
@@ -637,7 +795,9 @@
 "lat": -32.9663,
 "lon": -69.3911,
 "alt": 3830,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 81,
@@ -645,7 +805,9 @@
 "lat": -31.9047,
 "lon": -70.0012,
 "alt": 3160,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.5,
+"varios_dias": false
 },
 {
 "n": 82,
@@ -653,7 +815,9 @@
 "lat": -31.9503,
 "lon": -70.0499,
 "alt": 4040,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 83,
@@ -661,7 +825,9 @@
 "lat": -35.5153,
 "lon": -69.7968,
 "alt": 1770,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 0.9,
+"varios_dias": false
 },
 {
 "n": 84,
@@ -669,7 +835,9 @@
 "lat": -33.0166,
 "lon": -69.0879,
 "alt": 2009,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 85,
@@ -677,7 +845,9 @@
 "lat": -32.7717,
 "lon": -69.355,
 "alt": 2129,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 1.8,
+"varios_dias": false
 },
 {
 "n": 86,
@@ -685,7 +855,9 @@
 "lat": -32.8186,
 "lon": -69.2341,
 "alt": 1857,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 87,
@@ -693,7 +865,9 @@
 "lat": -34.5708,
 "lon": -68.6998,
 "alt": 1251,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.0,
+"varios_dias": false
 },
 {
 "n": 88,
@@ -701,7 +875,9 @@
 "lat": -32.4981,
 "lon": -69.4743,
 "alt": 2881,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 89,
@@ -709,7 +885,9 @@
 "lat": -32.715,
 "lon": -69.372,
 "alt": 2087,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 90,
@@ -717,7 +895,9 @@
 "lat": -32.6235,
 "lon": -69.5399,
 "alt": 2485,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 91,
@@ -725,7 +905,9 @@
 "lat": -32.9786,
 "lon": -69.4169,
 "alt": 4350,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 92,
@@ -733,7 +915,9 @@
 "lat": -32.9968,
 "lon": -69.439,
 "alt": 5203,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 8.0,
+"varios_dias": false
 },
 {
 "n": 93,
@@ -741,7 +925,9 @@
 "lat": -32.6702,
 "lon": -69.5941,
 "alt": 2497,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 94,
@@ -749,7 +935,9 @@
 "lat": -37.8226,
 "lon": -70.9141,
 "alt": 1515,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 0.9,
+"varios_dias": false
 },
 {
 "n": 95,
@@ -757,7 +945,9 @@
 "lat": -32.983,
 "lon": -69.4384,
 "alt": 5470,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 8.0,
+"varios_dias": false
 },
 {
 "n": 96,
@@ -765,7 +955,9 @@
 "lat": -33.0159,
 "lon": -69.4551,
 "alt": 5968,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 10.5,
+"varios_dias": false
 },
 {
 "n": 97,
@@ -773,7 +965,9 @@
 "lat": -32.8796,
 "lon": -69.8737,
 "alt": 4350,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.3,
+"varios_dias": false
 },
 {
 "n": 98,
@@ -781,7 +975,9 @@
 "lat": -32.5458,
 "lon": -68.8353,
 "alt": 1284,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.3,
+"varios_dias": false
 },
 {
 "n": 99,
@@ -789,7 +985,9 @@
 "lat": -32.3798,
 "lon": -64.9241,
 "alt": 2120,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": null,
+"varios_dias": true
 },
 {
 "n": 100,
@@ -797,7 +995,9 @@
 "lat": -32.9798,
 "lon": -69.4178,
 "alt": 4366,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 101,
@@ -805,7 +1005,9 @@
 "lat": -32.8169,
 "lon": -69.3912,
 "alt": 2474,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.2,
+"varios_dias": false
 },
 {
 "n": 102,
@@ -813,7 +1015,9 @@
 "lat": -32.5338,
 "lon": -69.2626,
 "alt": 2221,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 103,
@@ -821,7 +1025,9 @@
 "lat": -32.8824,
 "lon": -69.9316,
 "alt": 3609,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.3,
+"varios_dias": false
 },
 {
 "n": 104,
@@ -829,7 +1035,9 @@
 "lat": -35.9796,
 "lon": -70.3904,
 "alt": 2562,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.0,
+"varios_dias": false
 },
 {
 "n": 105,
@@ -837,7 +1045,9 @@
 "lat": -33.0036,
 "lon": -69.0781,
 "alt": 1925,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 106,
@@ -845,7 +1055,9 @@
 "lat": -32.9065,
 "lon": -69.3398,
 "alt": 2800,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.3,
+"varios_dias": false
 },
 {
 "n": 107,
@@ -853,7 +1065,9 @@
 "lat": -33.614,
 "lon": -69.5579,
 "alt": 3460,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 108,
@@ -861,7 +1075,9 @@
 "lat": -32.9601,
 "lon": -69.3822,
 "alt": 4103,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 109,
@@ -869,7 +1085,9 @@
 "lat": -32.9677,
 "lon": -69.4001,
 "alt": 4146,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 110,
@@ -877,7 +1095,9 @@
 "lat": -33.6219,
 "lon": -69.6072,
 "alt": 4345,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": null,
+"varios_dias": true
 },
 {
 "n": 111,
@@ -885,7 +1105,9 @@
 "lat": -32.4878,
 "lon": -69.071,
 "alt": 2844,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.8,
+"varios_dias": false
 },
 {
 "n": 112,
@@ -893,7 +1115,9 @@
 "lat": -32.0921,
 "lon": -68.7735,
 "alt": 991,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 113,
@@ -901,7 +1125,9 @@
 "lat": -32.6761,
 "lon": -69.3036,
 "alt": 2890,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.0,
+"varios_dias": false
 },
 {
 "n": 114,
@@ -909,7 +1135,9 @@
 "lat": -32.6761,
 "lon": -69.3036,
 "alt": 2974,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.2,
+"varios_dias": false
 },
 {
 "n": 115,
@@ -917,7 +1145,9 @@
 "lat": -32.8121,
 "lon": -69.2681,
 "alt": 2872,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.0,
+"varios_dias": false
 },
 {
 "n": 116,
@@ -925,7 +1155,9 @@
 "lat": -33.0336,
 "lon": -69.3475,
 "alt": 2924,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.7,
+"varios_dias": false
 },
 {
 "n": 117,
@@ -933,7 +1165,9 @@
 "lat": -32.7813,
 "lon": -69.1175,
 "alt": 3441,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 118,
@@ -941,7 +1175,9 @@
 "lat": -33.0237,
 "lon": -69.3674,
 "alt": 3639,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.4,
+"varios_dias": false
 },
 {
 "n": 119,
@@ -949,7 +1185,9 @@
 "lat": -32.516,
 "lon": -69.1178,
 "alt": 3349,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.8,
+"varios_dias": false
 },
 {
 "n": 120,
@@ -957,7 +1195,9 @@
 "lat": -32.9693,
 "lon": -69.4048,
 "alt": 4215,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 121,
@@ -965,7 +1205,9 @@
 "lat": -32.9642,
 "lon": -69.4052,
 "alt": 4126,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 5.5,
+"varios_dias": false
 },
 {
 "n": 122,
@@ -973,7 +1215,9 @@
 "lat": -31.796,
 "lon": -69.3003,
 "alt": 2438,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.5,
+"varios_dias": false
 },
 {
 "n": 123,
@@ -981,7 +1225,9 @@
 "lat": -33.0467,
 "lon": -69.3088,
 "alt": 2363,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 124,
@@ -989,7 +1235,9 @@
 "lat": -33.5999,
 "lon": -69.4838,
 "alt": 2437,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.5,
+"varios_dias": false
 },
 {
 "n": 125,
@@ -997,7 +1245,9 @@
 "lat": -33.6041,
 "lon": -69.4101,
 "alt": 2197,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.0,
+"varios_dias": false
 },
 {
 "n": 126,
@@ -1005,7 +1255,9 @@
 "lat": -32.9584,
 "lon": -69.3621,
 "alt": 3647,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.4,
+"varios_dias": false
 },
 {
 "n": 127,
@@ -1013,7 +1265,9 @@
 "lat": -32.96,
 "lon": -69.3981,
 "alt": 4106,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 3.5,
+"varios_dias": false
 },
 {
 "n": 128,
@@ -1021,7 +1275,9 @@
 "lat": -32.8364,
 "lon": -68.9346,
 "alt": 1673,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.0,
+"varios_dias": false
 },
 {
 "n": 129,
@@ -1029,7 +1285,9 @@
 "lat": -32.6553,
 "lon": -69.1833,
 "alt": 3105,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 12.0,
+"varios_dias": false
 },
 {
 "n": 130,
@@ -1037,7 +1295,9 @@
 "lat": -32.8349,
 "lon": -69.0367,
 "alt": 2535,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 7.5,
+"varios_dias": false
 },
 {
 "n": 131,
@@ -1045,7 +1305,9 @@
 "lat": -32.8447,
 "lon": -69.0004,
 "alt": 2241,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 2.8,
+"varios_dias": false
 },
 {
 "n": 132,
@@ -1053,7 +1315,9 @@
 "lat": -32.8157,
 "lon": -69.0019,
 "alt": 1907,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 4.0,
+"varios_dias": false
 },
 {
 "n": 133,
@@ -1061,6 +1325,8 @@
 "lat": -32.7543,
 "lon": -69.1626,
 "alt": 2471,
-"tipo": "Cumbre"
+"tipo": "Cumbre",
+"horas": 8.0,
+"varios_dias": false
 }
 ]
