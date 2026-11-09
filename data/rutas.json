@@ -1,0 +1,1066 @@
+[
+{
+"n": 1,
+"nombre": "Cerro Mesilla – Challao 22k",
+"lat": -32.8428,
+"lon": -69.0328,
+"alt": 2518,
+"tipo": "Cumbre"
+},
+{
+"n": 2,
+"nombre": "Cascada & C° La Montura – El Salto 16k",
+"lat": -32.9232,
+"lon": -69.3487,
+"alt": 3000,
+"tipo": "Cumbre"
+},
+{
+"n": 3,
+"nombre": "Cerro Hormiguero/Cabras – Potrerillos 22k",
+"lat": -32.9462,
+"lon": -69.2535,
+"alt": 2139,
+"tipo": "Cumbre"
+},
+{
+"n": 4,
+"nombre": "Chorro de la Vieja – Manzano 22k",
+"lat": -33.6209,
+"lon": -69.4915,
+"alt": 2646,
+"tipo": "Cumbre"
+},
+{
+"n": 5,
+"nombre": "Quebrada del Hornillo – Villavicencio 17k",
+"lat": -32.4943,
+"lon": -69.0365,
+"alt": 2500,
+"tipo": "Cumbre"
+},
+{
+"n": 6,
+"nombre": "Laguna del Platita – Las Vegas 25k",
+"lat": -33.0524,
+"lon": -69.3956,
+"alt": 4200,
+"tipo": "Cumbre"
+},
+{
+"n": 7,
+"nombre": "Quebrada de los Berros – Cacheuta 17k",
+"lat": -32.9895,
+"lon": -69.0759,
+"alt": 2100,
+"tipo": "Cumbre"
+},
+{
+"n": 8,
+"nombre": "Cerro Colorado – Cacheuta 14k",
+"lat": -32.9979,
+"lon": -69.0663,
+"alt": 2140,
+"tipo": "Punto más alto"
+},
+{
+"n": 9,
+"nombre": "Cerro Negro – La Crucecita 10k",
+"lat": -32.9807,
+"lon": -69.0478,
+"alt": 2190,
+"tipo": "Cumbre"
+},
+{
+"n": 10,
+"nombre": "Cerro Arturo Penny – La Crucecita 17k",
+"lat": -32.9592,
+"lon": -69.071,
+"alt": 2576,
+"tipo": "Cumbre"
+},
+{
+"n": 11,
+"nombre": "Cerro Morro San Martín – La Crucecita 14k",
+"lat": -32.9659,
+"lon": -69.0636,
+"alt": 2414,
+"tipo": "Cumbre"
+},
+{
+"n": 12,
+"nombre": "Cerro Arenales – La Crucecita 13k",
+"lat": -32.9688,
+"lon": -69.0614,
+"alt": 2400,
+"tipo": "Cumbre"
+},
+{
+"n": 13,
+"nombre": "Cascada de la Virgen – La Crucecita 11k",
+"lat": -32.9869,
+"lon": -69.0653,
+"alt": 1950,
+"tipo": "Cumbre"
+},
+{
+"n": 14,
+"nombre": "Cascada del Colorado – La Crucecita 10k",
+"lat": -32.9823,
+"lon": -69.0664,
+"alt": 1930,
+"tipo": "Cumbre"
+},
+{
+"n": 15,
+"nombre": "Cascada del Vizcacheras – La Crucecita 11k",
+"lat": -32.9811,
+"lon": -69.0694,
+"alt": 1990,
+"tipo": "Cumbre"
+},
+{
+"n": 16,
+"nombre": "Cerro Arco – El Challao 9,22k",
+"lat": -32.8364,
+"lon": -68.9346,
+"alt": 1661,
+"tipo": "Cumbre"
+},
+{
+"n": 17,
+"nombre": "Cascada Cajón de Minas – El Challao 13k",
+"lat": -32.9134,
+"lon": -69.0568,
+"alt": 2035,
+"tipo": "Cumbre"
+},
+{
+"n": 18,
+"nombre": "Santo Tomás de Aquino – El Challao 14k",
+"lat": -32.8251,
+"lon": -68.9542,
+"alt": 1670,
+"tipo": "Cumbre"
+},
+{
+"n": 19,
+"nombre": "Cerro Gateado – El Challao 22k",
+"lat": -32.8178,
+"lon": -68.9814,
+"alt": 2092,
+"tipo": "Cumbre"
+},
+{
+"n": 20,
+"nombre": "Cerro Vizcacha – El Challao 25k",
+"lat": -32.8083,
+"lon": -68.9945,
+"alt": 2192,
+"tipo": "Cumbre"
+},
+{
+"n": 21,
+"nombre": "Cerro La Montura & Cascada – El Salto 6k",
+"lat": -32.9212,
+"lon": -69.3485,
+"alt": 2990,
+"tipo": "Cumbre"
+},
+{
+"n": 22,
+"nombre": "Cerro Mirador – El Salto 7k",
+"lat": -32.9223,
+"lon": -69.3521,
+"alt": 3280,
+"tipo": "Cumbre"
+},
+{
+"n": 23,
+"nombre": "Refugio Ianigla – El Salto 10k",
+"lat": -32.9238,
+"lon": -69.3651,
+"alt": 3650,
+"tipo": "Cumbre"
+},
+{
+"n": 24,
+"nombre": "Mirador – El Carrizal 86k",
+"lat": -33.2928,
+"lon": -68.7526,
+"alt": 850,
+"tipo": "Cumbre"
+},
+{
+"n": 25,
+"nombre": "Reserva Natural Divisadero Largo – El Challao 5k",
+"lat": -32.8836,
+"lon": -68.9388,
+"alt": 1115,
+"tipo": "Cumbre"
+},
+{
+"n": 26,
+"nombre": "Cerro Comisión – Cacheuta 14k",
+"lat": -33.0093,
+"lon": -69.0773,
+"alt": 2090,
+"tipo": "Cumbre"
+},
+{
+"n": 27,
+"nombre": "Cerro Ponderado – Cacheuta 20,5k",
+"lat": -32.9777,
+"lon": -69.0854,
+"alt": 2610,
+"tipo": "Cumbre"
+},
+{
+"n": 28,
+"nombre": "Cerro Vizcacheras – Cacheuta 21,5k",
+"lat": -32.9734,
+"lon": -69.0852,
+"alt": 2660,
+"tipo": "Cumbre"
+},
+{
+"n": 29,
+"nombre": "Laguna San Roque – San Roque 35k",
+"lat": -33.0671,
+"lon": -68.479,
+"alt": 690,
+"tipo": "Cumbre"
+},
+{
+"n": 30,
+"nombre": "Laguna del Viborón – Maipú 80k",
+"lat": -32.9696,
+"lon": -68.6868,
+"alt": 710,
+"tipo": "Cumbre"
+},
+{
+"n": 31,
+"nombre": "Cerro Siete Colores – Uspallata 19k",
+"lat": -32.6208,
+"lon": -69.2654,
+"alt": 2329,
+"tipo": "Cumbre"
+},
+{
+"n": 32,
+"nombre": "Cerro El Platita – Las Vegas 21k",
+"lat": -33.0681,
+"lon": -69.4006,
+"alt": 4405,
+"tipo": "Cumbre"
+},
+{
+"n": 33,
+"nombre": "Cascada del Potrero Escondido – Las Cuevas 22k",
+"lat": -32.7499,
+"lon": -70.1059,
+"alt": 3410,
+"tipo": "Cumbre"
+},
+{
+"n": 34,
+"nombre": "Recorriendo Las Vegas – Las Vegas 30k",
+"lat": -33.0181,
+"lon": -69.2994,
+"alt": 2150,
+"tipo": "Cumbre"
+},
+{
+"n": 35,
+"nombre": "Cajón de la Salada – San Carlos 29k",
+"lat": -33.8053,
+"lon": -68.9179,
+"alt": 1072,
+"tipo": "Cumbre"
+},
+{
+"n": 36,
+"nombre": "Cerro Médanos – Potrerillos 22k",
+"lat": -32.8595,
+"lon": -69.3108,
+"alt": 3065,
+"tipo": "Cumbre"
+},
+{
+"n": 37,
+"nombre": "Ruta Provincial N°13 – Uspallata – Mendoza 84k",
+"lat": -32.6553,
+"lon": -69.1833,
+"alt": 3100,
+"tipo": "Cumbre"
+},
+{
+"n": 38,
+"nombre": "Altos Limpios – Lavalle – Mendoza 210k",
+"lat": -33.0612,
+"lon": -68.4736,
+"alt": 670,
+"tipo": "Punto más alto"
+},
+{
+"n": 39,
+"nombre": "Cajón de los Arenales – Manzano 14k",
+"lat": -33.6486,
+"lon": -69.5359,
+"alt": 3385,
+"tipo": "Cumbre"
+},
+{
+"n": 40,
+"nombre": "Cascada Cajón de los Arenales – Manzano 20k",
+"lat": -33.6698,
+"lon": -69.557,
+"alt": 4023,
+"tipo": "Cumbre"
+},
+{
+"n": 41,
+"nombre": "Cerro Castaño – El Salto 10,5k",
+"lat": -32.9209,
+"lon": -69.3196,
+"alt": 2875,
+"tipo": "Cumbre"
+},
+{
+"n": 42,
+"nombre": "Cerro Polcura – El Salto 15k",
+"lat": -32.9203,
+"lon": -69.32,
+"alt": 2877,
+"tipo": "Cumbre"
+},
+{
+"n": 43,
+"nombre": "Penitentes/Plaza Francia/Grajales/Penitentes – Aconcagua 70k",
+"lat": -32.6878,
+"lon": -69.9644,
+"alt": 4200,
+"tipo": "Cumbre"
+},
+{
+"n": 44,
+"nombre": "Los Zorzales – Vallecitos 21k",
+"lat": -32.9866,
+"lon": -69.3514,
+"alt": 2650,
+"tipo": "Cumbre"
+},
+{
+"n": 45,
+"nombre": "Las Carreras : Tupungato – Las Vegas 84k",
+"lat": -33.0533,
+"lon": -69.2858,
+"alt": 2305,
+"tipo": "Cumbre"
+},
+{
+"n": 46,
+"nombre": "La Hoyada – Vallecitos 16k",
+"lat": -32.9903,
+"lon": -69.4266,
+"alt": 4665,
+"tipo": "Cumbre"
+},
+{
+"n": 47,
+"nombre": "Antena de Paramillos: Villavicencio – Paramillos 58k",
+"lat": -32.4722,
+"lon": -69.1106,
+"alt": 3150,
+"tipo": "Cumbre"
+},
+{
+"n": 48,
+"nombre": "Cº San Bartolo: Villavicencio – Paramillos 61k",
+"lat": -32.4599,
+"lon": -69.1121,
+"alt": 3320,
+"tipo": "Cumbre"
+},
+{
+"n": 49,
+"nombre": "Quebrada La Langostura – Vallecitos 13k",
+"lat": -33.0075,
+"lon": -69.4192,
+"alt": 3750,
+"tipo": "Cumbre"
+},
+{
+"n": 50,
+"nombre": "Pozo de las Ánimas – Los Molles 15k",
+"lat": -35.1895,
+"lon": -70.0024,
+"alt": 2015,
+"tipo": "Cumbre"
+},
+{
+"n": 51,
+"nombre": "Laguna de la Niña Encantada – Los Molles 14k",
+"lat": -35.1551,
+"lon": -69.939,
+"alt": 1930,
+"tipo": "Punto más alto"
+},
+{
+"n": 52,
+"nombre": "Laguna de Las Hoyadas – Los Molles 19k",
+"lat": -35.1439,
+"lon": -69.8677,
+"alt": 2140,
+"tipo": "Cumbre"
+},
+{
+"n": 53,
+"nombre": "Paso del Portillo (Parte 1) – Tunuyán 38k",
+"lat": -33.621,
+"lon": -69.5906,
+"alt": 3951,
+"tipo": "Cumbre"
+},
+{
+"n": 54,
+"nombre": "Cañón del Atuel – San Rafael 97k",
+"lat": -35.0154,
+"lon": -68.6691,
+"alt": 1311,
+"tipo": "Cumbre"
+},
+{
+"n": 55,
+"nombre": "Cristo del Rey – Tupungato 185k",
+"lat": -33.271,
+"lon": -69.1173,
+"alt": 1423,
+"tipo": "Cumbre"
+},
+{
+"n": 56,
+"nombre": "Cerro Arenales – El Salto / Vallecitos 22k",
+"lat": -32.9624,
+"lon": -69.3509,
+"alt": 3392,
+"tipo": "Cumbre"
+},
+{
+"n": 57,
+"nombre": "Glaciar Arenales – El Manzano / Tunuyán 22k",
+"lat": -33.6866,
+"lon": -69.5611,
+"alt": 4583,
+"tipo": "Cumbre"
+},
+{
+"n": 58,
+"nombre": "Laguna del Potrero Escondido – Las Cuevas 26k",
+"lat": -32.7495,
+"lon": -70.1184,
+"alt": 3728,
+"tipo": "Cumbre"
+},
+{
+"n": 59,
+"nombre": "Cristo Redentor / Laguna del Inca – Las Cuevas / Chile 41k",
+"lat": -32.8237,
+"lon": -70.0738,
+"alt": 3882,
+"tipo": "Cumbre"
+},
+{
+"n": 60,
+"nombre": "Paso del Portillo (Final) – Tunuyán 50k",
+"lat": -33.622,
+"lon": -69.6074,
+"alt": 4343,
+"tipo": "Cumbre"
+},
+{
+"n": 61,
+"nombre": "Cerro Alumbre Rojo/Blanco – Potrerillos 21k",
+"lat": -32.7923,
+"lon": -69.3717,
+"alt": 3586,
+"tipo": "Cumbre"
+},
+{
+"n": 62,
+"nombre": "Cerro Rojo – Alumbre/Potrerillos 12k",
+"lat": -32.839,
+"lon": -69.3417,
+"alt": 2340,
+"tipo": "Cumbre"
+},
+{
+"n": 63,
+"nombre": "Mirador Quebrada Los Arroyos – Potrerillos 25k",
+"lat": -32.8944,
+"lon": -69.3208,
+"alt": 2662,
+"tipo": "Cumbre"
+},
+{
+"n": 64,
+"nombre": "Pared Este Cerro El Plata 18k",
+"lat": -33.0087,
+"lon": -69.4029,
+"alt": 4100,
+"tipo": "Cumbre"
+},
+{
+"n": 65,
+"nombre": "Pampa de la Quebrada del Cóndor – Puesto Las Lajas 14k",
+"lat": -33.0388,
+"lon": -69.3706,
+"alt": 3420,
+"tipo": "Punto más alto"
+},
+{
+"n": 66,
+"nombre": "360 Ruta 40 – La Jaula 75k",
+"lat": -34.597,
+"lon": -69.3047,
+"alt": 1836,
+"tipo": "Cumbre"
+},
+{
+"n": 67,
+"nombre": "Cañón del Colorado – Jocolí 40k",
+"lat": -32.5547,
+"lon": -68.8005,
+"alt": 870,
+"tipo": "Cumbre"
+},
+{
+"n": 68,
+"nombre": "Río de las Tunas – Tupungato 24k",
+"lat": -33.3532,
+"lon": -69.3865,
+"alt": 1820,
+"tipo": "Cumbre"
+},
+{
+"n": 69,
+"nombre": "Volcán El Diamante – San Rafael 22k",
+"lat": -34.6338,
+"lon": -69.0856,
+"alt": 2325,
+"tipo": "Cumbre"
+},
+{
+"n": 70,
+"nombre": "Cascada del Chacarero / San Rafael 40k",
+"lat": -34.6613,
+"lon": -68.9259,
+"alt": 1630,
+"tipo": "Cumbre"
+},
+{
+"n": 71,
+"nombre": "Quebrada de los Gateados – Potrerillos 25k",
+"lat": -32.8473,
+"lon": -69.2052,
+"alt": 1894,
+"tipo": "Cumbre"
+},
+{
+"n": 72,
+"nombre": "Quebrada de Barauca – Uspallata 70k",
+"lat": -32.3948,
+"lon": -69.5825,
+"alt": 3023,
+"tipo": "Cumbre"
+},
+{
+"n": 73,
+"nombre": "Las Morenas Coloradas – Vallecitos 15k",
+"lat": -32.9364,
+"lon": -69.4056,
+"alt": 4342,
+"tipo": "Cumbre"
+},
+{
+"n": 74,
+"nombre": "Expedición Platita-Laguna (1 noche) 21k",
+"lat": -33.0681,
+"lon": -69.4005,
+"alt": 4406,
+"tipo": "Cumbre"
+},
+{
+"n": 75,
+"nombre": "Laguna del Diamante – San Carlos 43k",
+"lat": -34.2233,
+"lon": -69.5143,
+"alt": 3750,
+"tipo": "Cumbre"
+},
+{
+"n": 76,
+"nombre": "Las Aucas Sosneado – Malargüe 30k",
+"lat": -34.7286,
+"lon": -69.6514,
+"alt": 2717,
+"tipo": "Cumbre"
+},
+{
+"n": 77,
+"nombre": "Quebrada de Vargas – Penitentes 18k",
+"lat": -32.8806,
+"lon": -69.9209,
+"alt": 3530,
+"tipo": "Cumbre"
+},
+{
+"n": 78,
+"nombre": "Cerro Franke – Vallecitos 13k",
+"lat": -32.9979,
+"lon": -69.4021,
+"alt": 4817,
+"tipo": "Cumbre"
+},
+{
+"n": 79,
+"nombre": "Ranchillos – Uspallata 21k",
+"lat": -32.5805,
+"lon": -69.5138,
+"alt": 2330,
+"tipo": "Cumbre"
+},
+{
+"n": 80,
+"nombre": "Cascada del Medio – Vallecitos 10k",
+"lat": -32.9663,
+"lon": -69.3911,
+"alt": 3830,
+"tipo": "Cumbre"
+},
+{
+"n": 81,
+"nombre": "Barreal – Laguna Blanca 60k",
+"lat": -31.9047,
+"lon": -70.0012,
+"alt": 3160,
+"tipo": "Cumbre"
+},
+{
+"n": 82,
+"nombre": "Arroyo Turquesa – San Juan 18k",
+"lat": -31.9503,
+"lon": -70.0499,
+"alt": 4040,
+"tipo": "Cumbre"
+},
+{
+"n": 83,
+"nombre": "Castillos de Pincheira – Malargüe 12k",
+"lat": -35.5153,
+"lon": -69.7968,
+"alt": 1770,
+"tipo": "Cumbre"
+},
+{
+"n": 84,
+"nombre": "Camello Sur – Cacheuta 15k",
+"lat": -33.0166,
+"lon": -69.0879,
+"alt": 2009,
+"tipo": "Cumbre"
+},
+{
+"n": 85,
+"nombre": "Quebrada la Soltera – Uspallata 15k",
+"lat": -32.7717,
+"lon": -69.355,
+"alt": 2129,
+"tipo": "Cumbre"
+},
+{
+"n": 86,
+"nombre": "Quebrada del Medio – Guido 21k",
+"lat": -32.8186,
+"lon": -69.2341,
+"alt": 1857,
+"tipo": "Cumbre"
+},
+{
+"n": 87,
+"nombre": "Cañón del Diamante & Cascada del Colorado – San Rafael 50k",
+"lat": -34.5708,
+"lon": -68.6998,
+"alt": 1251,
+"tipo": "Cumbre"
+},
+{
+"n": 88,
+"nombre": "Cascada del Diamante – Arroyo El Durazno Uspallata 19k",
+"lat": -32.4981,
+"lon": -69.4743,
+"alt": 2881,
+"tipo": "Cumbre"
+},
+{
+"n": 89,
+"nombre": "Cascada de la Estación – Quebrada de la Quinta 13k",
+"lat": -32.715,
+"lon": -69.372,
+"alt": 2087,
+"tipo": "Cumbre"
+},
+{
+"n": 90,
+"nombre": "Quebrada de la Seca – Uspallata 21k",
+"lat": -32.6235,
+"lon": -69.5399,
+"alt": 2485,
+"tipo": "Cumbre"
+},
+{
+"n": 91,
+"nombre": "Salto de Agua – Vallecitos 14k",
+"lat": -32.9786,
+"lon": -69.4169,
+"alt": 4350,
+"tipo": "Cumbre"
+},
+{
+"n": 92,
+"nombre": "Coll Plata/Vallecitos 21k",
+"lat": -32.9968,
+"lon": -69.439,
+"alt": 5203,
+"tipo": "Cumbre"
+},
+{
+"n": 93,
+"nombre": "Quebrada de Picheuta 17k",
+"lat": -32.6702,
+"lon": -69.5941,
+"alt": 2497,
+"tipo": "Cumbre"
+},
+{
+"n": 94,
+"nombre": "Salto del Agrio – Neuquén 11k",
+"lat": -37.8226,
+"lon": -70.9141,
+"alt": 1515,
+"tipo": "Cumbre"
+},
+{
+"n": 95,
+"nombre": "Veguitas – Cº Vallecitos 22k",
+"lat": -32.983,
+"lon": -69.4384,
+"alt": 5470,
+"tipo": "Cumbre"
+},
+{
+"n": 96,
+"nombre": "Veguitas – Cº Plata 25k",
+"lat": -33.0159,
+"lon": -69.4551,
+"alt": 5968,
+"tipo": "Cumbre"
+},
+{
+"n": 97,
+"nombre": "Cº Penitentes – NonStop 21k",
+"lat": -32.8796,
+"lon": -69.8737,
+"alt": 4350,
+"tipo": "Cumbre"
+},
+{
+"n": 98,
+"nombre": "Minas de Salagasta – 26k",
+"lat": -32.5458,
+"lon": -68.8353,
+"alt": 1284,
+"tipo": "Cumbre"
+},
+{
+"n": 99,
+"nombre": "Pueblo Escondido – 26k",
+"lat": -32.3798,
+"lon": -64.9241,
+"alt": 2120,
+"tipo": "Cumbre"
+},
+{
+"n": 100,
+"nombre": "Zona de Glaciares – Cerro Rincón 14k",
+"lat": -32.9798,
+"lon": -69.4178,
+"alt": 4366,
+"tipo": "Cumbre"
+},
+{
+"n": 101,
+"nombre": "Quebrada del Alumbre – 23k",
+"lat": -32.8169,
+"lon": -69.3912,
+"alt": 2474,
+"tipo": "Cumbre"
+},
+{
+"n": 102,
+"nombre": "Mirador de la Ventana – Uspallata – 17k",
+"lat": -32.5338,
+"lon": -69.2626,
+"alt": 2221,
+"tipo": "Cumbre"
+},
+{
+"n": 103,
+"nombre": "Laguna Seca Penitentes 22k",
+"lat": -32.8824,
+"lon": -69.9316,
+"alt": 3609,
+"tipo": "Cumbre"
+},
+{
+"n": 104,
+"nombre": "Malacara/Maule – Paso Pehuenche 120k",
+"lat": -35.9796,
+"lon": -70.3904,
+"alt": 2562,
+"tipo": "Cumbre"
+},
+{
+"n": 105,
+"nombre": "Qda Estudiante – Qda de los Berros 19k",
+"lat": -33.0036,
+"lon": -69.0781,
+"alt": 1925,
+"tipo": "Cumbre"
+},
+{
+"n": 106,
+"nombre": "Qda Alumbre – Cascada El Salto 36k",
+"lat": -32.9065,
+"lon": -69.3398,
+"alt": 2800,
+"tipo": "Cumbre"
+},
+{
+"n": 107,
+"nombre": "Valle de las Cascadas – Manzano 16k",
+"lat": -33.614,
+"lon": -69.5579,
+"alt": 3460,
+"tipo": "Cumbre"
+},
+{
+"n": 108,
+"nombre": "Cerro San Bernardo – Vallecitos 10k",
+"lat": -32.9601,
+"lon": -69.3822,
+"alt": 4103,
+"tipo": "Cumbre"
+},
+{
+"n": 109,
+"nombre": "Cerro Stepanek – Vallecitos 7k",
+"lat": -32.9677,
+"lon": -69.4001,
+"alt": 4146,
+"tipo": "Cumbre"
+},
+{
+"n": 110,
+"nombre": "Manantiales – Portillo 40k",
+"lat": -33.6219,
+"lon": -69.6072,
+"alt": 4345,
+"tipo": "Cumbre"
+},
+{
+"n": 111,
+"nombre": "Mirador del Balcón – Villavicencio 18k",
+"lat": -32.4878,
+"lon": -69.071,
+"alt": 2844,
+"tipo": "Cumbre"
+},
+{
+"n": 112,
+"nombre": "Cascada Escondida Potrerillos – San Juan 45k",
+"lat": -32.0921,
+"lon": -68.7735,
+"alt": 991,
+"tipo": "Cumbre"
+},
+{
+"n": 113,
+"nombre": "Cerro Sarnoso Uspallata – Mendoza 13k",
+"lat": -32.6761,
+"lon": -69.3036,
+"alt": 2890,
+"tipo": "Cumbre"
+},
+{
+"n": 114,
+"nombre": "Cerro Colorado Uspallata – Mendoza 15k",
+"lat": -32.6761,
+"lon": -69.3036,
+"alt": 2974,
+"tipo": "Cumbre"
+},
+{
+"n": 115,
+"nombre": "Cerro Buitrera Potrerillos – Mendoza 21k",
+"lat": -32.8121,
+"lon": -69.2681,
+"alt": 2872,
+"tipo": "Cumbre"
+},
+{
+"n": 116,
+"nombre": "Cerro Mailhos – Cascada del Negro 10k",
+"lat": -33.0336,
+"lon": -69.3475,
+"alt": 2924,
+"tipo": "Cumbre"
+},
+{
+"n": 117,
+"nombre": "Cerro Pelado – Ruta 13 21k",
+"lat": -32.7813,
+"lon": -69.1175,
+"alt": 3441,
+"tipo": "Cumbre"
+},
+{
+"n": 118,
+"nombre": "Cerro Morro del Negro – Vallecitos 10k",
+"lat": -33.0237,
+"lon": -69.3674,
+"alt": 3639,
+"tipo": "Cumbre"
+},
+{
+"n": 119,
+"nombre": "C Áspero Sotavento Canario Clementillo – Paramillos 16k",
+"lat": -32.516,
+"lon": -69.1178,
+"alt": 3349,
+"tipo": "Cumbre"
+},
+{
+"n": 120,
+"nombre": "Vertientes La Canchita – Vallecitos 8k",
+"lat": -32.9693,
+"lon": -69.4048,
+"alt": 4215,
+"tipo": "Cumbre"
+},
+{
+"n": 121,
+"nombre": "Cataratas del Rincón – Vallecitos 10k",
+"lat": -32.9642,
+"lon": -69.4052,
+"alt": 4126,
+"tipo": "Cumbre"
+},
+{
+"n": 122,
+"nombre": "Reserva Pampa del Leoncito 50k",
+"lat": -31.796,
+"lon": -69.3003,
+"alt": 2438,
+"tipo": "Cumbre"
+},
+{
+"n": 123,
+"nombre": "Circuito Las Vegas – Arroyo el Negro 30k",
+"lat": -33.0467,
+"lon": -69.3088,
+"alt": 2363,
+"tipo": "Cumbre"
+},
+{
+"n": 124,
+"nombre": "Quebrada de los Guindos – Reserva Manzano 7k",
+"lat": -33.5999,
+"lon": -69.4838,
+"alt": 2437,
+"tipo": "Cumbre"
+},
+{
+"n": 125,
+"nombre": "Cerro San Pedro – Manzano 16k",
+"lat": -33.6041,
+"lon": -69.4101,
+"alt": 2197,
+"tipo": "Cumbre"
+},
+{
+"n": 126,
+"nombre": "Cerro Lomas Blancas – Vallecitos 16k",
+"lat": -32.9584,
+"lon": -69.3621,
+"alt": 3647,
+"tipo": "Cumbre"
+},
+{
+"n": 127,
+"nombre": "Cascada del Medio Superior – Vallecitos 12k",
+"lat": -32.96,
+"lon": -69.3981,
+"alt": 4106,
+"tipo": "Cumbre"
+},
+{
+"n": 128,
+"nombre": "Cerro Arco – Bajada del Caño – Cerro Arco 14k",
+"lat": -32.8364,
+"lon": -68.9346,
+"alt": 1673,
+"tipo": "Cumbre"
+},
+{
+"n": 129,
+"nombre": "Ruta 13 – 71k",
+"lat": -32.6553,
+"lon": -69.1833,
+"alt": 3105,
+"tipo": "Cumbre"
+},
+{
+"n": 130,
+"nombre": "Cerro Guamparito/Mesilla 30k",
+"lat": -32.8349,
+"lon": -69.0367,
+"alt": 2535,
+"tipo": "Cumbre"
+},
+{
+"n": 131,
+"nombre": "Cerro Áspero 15k",
+"lat": -32.8447,
+"lon": -69.0004,
+"alt": 2241,
+"tipo": "Cumbre"
+},
+{
+"n": 132,
+"nombre": "Puesto Las Tres Quebradas 22k",
+"lat": -32.8157,
+"lon": -69.0019,
+"alt": 1907,
+"tipo": "Cumbre"
+},
+{
+"n": 133,
+"nombre": "Laguna de los Cangrejos por Potrerillos 45k",
+"lat": -32.7543,
+"lon": -69.1626,
+"alt": 2471,
+"tipo": "Cumbre"
+}
+]
