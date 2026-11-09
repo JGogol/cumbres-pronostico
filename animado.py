@@ -74,7 +74,10 @@ def gif(ruta, d, ahora, destino):
         det = WMO.get(D['weather_code'][k], '')
         g.text((160, 44), det, font=F, fill=(220, 220, 220))
         g.text((160, 66), f"Ráfagas {round(gu[k])} km/h", font=F, fill=(255, 110, 110) if gu[k] >= 60 else (220, 220, 220))
-        p = f"Nieve {nv[k]:.0f} cm" if nv[k] >= 0.5 else (f"Lluvia {pr[k]:.0f} mm" if pr[k] >= 0.5 else 'Sin precipitación')
+        es_nieve = nv[k] > 0 or tx[k] <= 1 or (D['weather_code'][k] or 0) in (71, 73, 75, 77, 85, 86)
+        if pr[k] >= 0.5 and es_nieve: p = f"Nieve {max(nv[k], 1):.0f} cm" if nv[k] >= 0.5 else f"Nieve débil ({pr[k]:.0f} mm de agua)"
+        elif pr[k] >= 0.5: p = f"Lluvia {pr[k]:.0f} mm"
+        else: p = 'Sin precipitación'
         g.text((160, 86), p, font=F, fill=(190, 225, 255) if nv[k] >= 0.5 else (220, 220, 220))
         fl = [v for t, v in zip(H['time'], H['freezing_level_height']) if t.startswith(D['time'][k]) and v is not None]
         if fl: g.text((380, 44), f"Hiela desde los {round(min(fl), -2):.0f} m", font=F, fill=(180, 210, 255))

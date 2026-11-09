@@ -287,9 +287,117 @@ def detalle_png(ruta, D, ahora, destino):
     im.save(destino, optimize=True)
 
 
+NIEVE_C = (71, 73, 75, 77, 85, 86)
+LLUVIA_C = (51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82)
+TEXTO = {0: 'despejado', 1: 'despejado', 2: 'parcial', 3: 'nublado', 45: 'niebla', 48: 'niebla',
+         95: 'tormenta', 96: 'granizo', 99: 'granizo'}
+
+
+def simbolo(g, cx, cy, code, de_noche, s=9):
+    """Ícono simple del tiempo de la hora: sol/luna, nube, lluvia, nieve, rayos, granizo."""
+    nube = lambda: (g.ellipse((cx - s, cy - s * 0.4, cx + s * 0.2, cy + s * 0.5), fill=(185, 190, 200)),
+                    g.ellipse((cx - s * 0.4, cy - s * 0.8, cx + s, cy + s * 0.5), fill=(205, 210, 220)))
+    if code in (0, 1):
+        if de_noche:
+            g.ellipse((cx - s * 0.7, cy - s * 0.7, cx + s * 0.7, cy + s * 0.7), fill=(220, 220, 170))
+            g.ellipse((cx - s * 0.3, cy - s * 0.9, cx + s, cy + s * 0.5), fill=(26, 28, 34))
+        else:
+            g.ellipse((cx - s * 0.7, cy - s * 0.7, cx + s * 0.7, cy + s * 0.7), fill=(250, 200, 60))
+        return
+    if code == 2:
+        c = (220, 220, 170) if de_noche else (250, 200, 60)
+        g.ellipse((cx - s * 0.2, cy - s, cx + s, cy + s * 0.2), fill=c)
+    nube()
+    if code in LLUVIA_C:
+        for dx in (-s * 0.5, 0, s * 0.5): g.line((cx + dx, cy + s * 0.6, cx + dx - 2, cy + s * 1.1), fill=(90, 160, 255), width=2)
+    if code in NIEVE_C:
+        for dx in (-s * 0.5, s * 0.4): g.text((cx + dx - 3, cy + s * 0.3), '*', font=fuente(12, True), fill=(255, 255, 255))
+    if code >= 95:
+        g.polygon([(cx, cy + s * 0.3), (cx - 3, cy + s * 0.9), (cx, cy + s * 0.9), (cx - 2, cy + s * 1.4), (cx + 4, cy + s * 0.7), (cx + 1, cy + s * 0.7), (cx + 3, cy + s * 0.3)],
+                  fill=(255, 220, 40))
+    if code in (96, 99):
+        for dx in (-s * 0.6, s * 0.6): g.ellipse((cx + dx - 1.5, cy + s * 0.8, cx + dx + 1.5, cy + s * 1.1), fill=(255, 255, 255))
+
+
+def dia_png(ruta, D, ahora, k, destino):
+    """Un día completo, hora por hora, en toda la ruta."""
+    W, H = 600, 498
+    F, FB, FS, FG = fuente(13), fuente(17, True), fuente(12), fuente(22, True)
+    im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(im)
+    cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
+    fechas = sorted({h[:10] for h in D.horas})[:DIAS]
+    fe = fechas[k]; dd = datetime.date.fromisoformat(fe)
+    h0, h1 = k * 24, k * 24 + 24
+    sale, pone = D.sol.get(fe, (7, 19))
+    g.text((14, 8), ruta['nombre'][:44], font=FB, fill=(240, 240, 240))
+    nom = ('Hoy' if k == 0 else 'Mañana' if k == 1 else CORTA[dd.weekday()].capitalize()) + f' {dd:%d/%m}'
+    g.text((14, 32), nom, font=FG, fill=(90, 170, 255))
+    conf = 'confiable' if k < 2 else 'aceptable' if k < 5 else 'solo tendencia: puede cambiar'
+    g.text((14 + g.textlength(nom, font=FG) + 10, 42), f'día {k + 1} de {DIAS} · {conf}', font=FS,
+           fill=(140, 180, 220) if k < 2 else (200, 170, 90) if k < 5 else (200, 120, 90))
+    nv = sum(D.nieve[h0:h1]); ll = sum(D.lluvia[h0:h1]); rm = max(D.raf[h0:h1])
+    tor = any(c >= 95 for c in D.wcode[h0:h1]); gra = any(c in (96, 99) for c in D.wcode[h0:h1])
+    partes = [f'ráfagas en la cumbre hasta {round(rm)} km/h']
+    if nv >= 0.5: partes.append(f'nieve {nv:.0f} cm')
+    elif ll >= 0.5: partes.append(f'lluvia {ll:.0f} mm')
+    if gra: partes.append('granizo')
+    elif tor: partes.append('tormenta eléctrica')
+    g.text((14, 64), ' · '.join(partes).capitalize(), font=F, fill=(255, 130, 120) if rm >= 60 or tor else (210, 210, 210))
+    mf = D.mejor_franja(fe, ruta.get('horas'))
+    if mf:
+        g.text((14, 84), f"Mejor franja {mf[1]}–{mf[2]} h: condiciones {PLURAL[mf[0]]}", font=F, fill=NOTAS[mf[0]][1])
+    x0, x1 = 58, W - 34
+    X = lambda hh: x0 + hh * (x1 - x0) / 24
+    # fila 1: calificación por hora
+    yb = 108
+    g.text((4, yb - 1), 'condic.', font=fuente(11), fill=(170, 170, 170))
+    for hh in range(24): g.rectangle((X(hh), yb, X(hh + 1) - 1, yb + 10), fill=NOTAS[D.nota_hora(h0 + hh)][1])
+    if mf: g.rectangle((X(mf[1]), yb - 2, X(mf[2]), yb + 12), outline=(255, 255, 255), width=2)
+    # fila 2: símbolos del tiempo
+    ys = 136
+    g.text((4, ys - 6), 'tiempo', font=fuente(11), fill=(170, 170, 170))
+    for hh in range(24):
+        noche = hh + 0.5 < sale or hh + 0.5 > pone
+        if noche: g.rectangle((X(hh), ys - 12, X(hh + 1), ys + 14), fill=(26, 28, 34))
+        simbolo(g, (X(hh) + X(hh + 1)) / 2, ys, D.wcode[h0 + hh], noche, 7)
+    # fila 3: precipitación (mm/h, barras)
+    yp0, yp1 = 156, 176
+    g.text((4, yp0 + 3), 'precip.', font=fuente(11), fill=(170, 170, 170))
+    g.rectangle((x0, yp0, x1, yp1), fill=(38, 40, 46))
+    for hh in range(24):
+        h = h0 + hh; mm = D.lluvia[h]
+        if mm > 0:
+            alto = min(1, mm / 3) * (yp1 - yp0)
+            c = (235, 240, 255) if D.nieve[h] > 0 else (90, 160, 255)
+            g.rectangle((X(hh) + 2, yp1 - alto, X(hh + 1) - 2, yp1), fill=c)
+            if mm >= 0.5: g.text((X(hh) + 1, yp0 - 1), f'{mm:.0f}', font=fuente(10), fill=(220, 230, 255))
+    # panel principal: temperatura por altura, 0 °C y ráfagas
+    y0, y1 = 190, 340
+    panel(g, D, x0, y0, x1, y1, h0, h1, 3)
+    ejes_altura(g, D, 4, y0, y1, FS, cumbre)
+    for hh in range(1, 24, 3):
+        h = h0 + hh; x = (X(hh) + X(hh + 1)) / 2
+        for i, yy in ((len(D.alts) - 1, y0 + 4), (0, y1 - 18)):
+            t = D.T[i][h]; tx = f'{round(t)}°'
+            g.text((x - g.textlength(tx, font=F) / 2, yy), tx, font=F, fill=(15, 15, 15) if t > -4 else (240, 240, 240))
+    franja_viento(g, D, x0, y1 + 4, x1, h0, h1, FS, numeros_cada=3)
+    g.text((4, y1 + 5), 'viento', font=FS, fill=(200, 200, 200))
+    for hh in (0, 3, 6, 9, 12, 15, 18, 21):
+        g.text((X(hh) - 6, y1 + 22), f'{hh}h', font=FS, fill=(170, 170, 170))
+    leyendas(g, W, y1 + 42, F, FS)
+    g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
+    marca(im, (x0, y0, x1, y1)).save(destino, optimize=True)
+
+
 def altura_hora(ruta, perfil, ahora, carpeta):
+    import os
     D = Datos(perfil)
     n = f"{ruta['n']:03d}"
-    import os
+    sub = os.path.join(carpeta, n); os.makedirs(sub, exist_ok=True)
+    semana_png(ruta, D, ahora, os.path.join(sub, 'semana.png'))
+    for k in range(DIAS):
+        dia_png(ruta, D, ahora, k, os.path.join(sub, f'dia{k + 1}.png'))
+    # compatibilidad con la versión anterior de la página
     semana_png(ruta, D, ahora, os.path.join(carpeta, f'{n}-semana.png'))
     detalle_png(ruta, D, ahora, os.path.join(carpeta, f'{n}-detalle.png'))
+    return D

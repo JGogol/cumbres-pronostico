@@ -109,6 +109,13 @@ def dibujar(ruta, d, ahora):
     return im
 
 
+def guardar_historial(n, ahora, datos):
+    import gzip
+    carpeta = os.path.join(AQUI, 'historial', f'{n:03d}'); os.makedirs(carpeta, exist_ok=True)
+    with gzip.open(os.path.join(carpeta, f'{ahora:%Y-%m-%d_%H}.json.gz'), 'wt', encoding='utf-8') as f:
+        json.dump(datos, f, ensure_ascii=False, separators=(',', ':'))
+
+
 def main():
     rutas = json.load(open(os.path.join(AQUI, 'data', 'rutas.json'), encoding='utf-8'))
     if len(sys.argv) > 1:
@@ -133,9 +140,14 @@ def main():
                 dibujar(ruta, d, ahora).save(os.path.join(SALIDA, f"{ruta['n']:03d}.png"), optimize=True)
                 gif(ruta, d, ahora, os.path.join(SALIDA, f"{ruta['n']:03d}.gif"))
                 pf = os.path.join(AQUI, 'data', 'perfiles', f"{ruta['n']:03d}.json")
+                hist = {'ruta': ruta['n'], 'alt_cumbre': ruta['alt'], 'generado': ahora.isoformat(timespec='minutes'),
+                        'fuente': 'Open-Meteo forecast', 'diario_cumbre': d['daily']}
                 if os.path.exists(pf):
                     from altura_hora import altura_hora
-                    altura_hora(ruta, json.load(open(pf)), ahora, SALIDA)
+                    Dh = altura_hora(ruta, json.load(open(pf)), ahora, SALIDA)
+                    hist['por_altura'] = {'alturas': Dh.alts, 'horas': Dh.horas, 'temperatura': Dh.T, 'rafagas': Dh.G,
+                                          'precipitacion_max': Dh.lluvia, 'nieve_cumbre': Dh.nieve, 'codigo_tiempo': Dh.wcode}
+                guardar_historial(ruta['n'], ahora, hist)
                 ok += 1
             except Exception:
                 errores.append(f"ruta {ruta['n']}: " + traceback.format_exc())

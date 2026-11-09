@@ -9,7 +9,7 @@ on:
     branches: [master]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -30,6 +30,14 @@ jobs:
           python-version: '3.12'
       - run: pip install pillow
       - run: python pronostico.py
+      - name: Guardar historial de datos
+        run: |
+          git config user.name "cumbres-bot"
+          git config user.email "cumbres-bot@users.noreply.github.com"
+          git add historial
+          git commit -m "Historial $(date -u +%Y-%m-%dT%H:%M)" || echo "sin cambios"
+          git pull --rebase -q || true
+          git push || echo "no se pudo subir el historial"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
