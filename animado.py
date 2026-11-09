@@ -2,6 +2,7 @@
 import datetime
 from PIL import Image, ImageDraw
 from pronostico import fuente, color_t, tenue, CORTA, WMO
+from perfil_clima import marca
 
 def gif(ruta, d, ahora, destino):
     D = d['daily']; H = d['hourly']; nd = len(D['time'])
@@ -54,10 +55,10 @@ def gif(ruta, d, ahora, destino):
             f = 1 if k < 2 else 0.85 if k < 7 else 0.6
             c = (235, 80, 80) if gu[k] >= 60 else (200, 150, 150)
             g.rectangle((cx(k) - cw * 0.22, gy(gu[k]), cx(k) + cw * 0.22, VB), fill=tenue(c, f))
-        g.text((14, 8), f"Pronóstico 16 días · {lugar} {ruta['alt']} msnm", font=FB, fill=(240, 240, 240))
-        g.text((14, Hh - 22), f"Open-Meteo a {ruta['alt']} m · actualizado {ahora:%d/%m %H:%M} · orientativo, confirmalo antes de salir",
+        g.text((14, 8), f"{ruta['nombre'][:30]} · 16 días · {lugar} {ruta['alt']} m", font=FB, fill=(240, 240, 240))
+        g.text((14, Hh - 22), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo",
                font=FS, fill=(150, 150, 150))
-        return im
+        return marca(im, (L, T, R, VB))
 
     frames, dur = [], []
     fondo = base()

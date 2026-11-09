@@ -132,6 +132,10 @@ def main():
             try:
                 dibujar(ruta, d, ahora).save(os.path.join(SALIDA, f"{ruta['n']:03d}.png"), optimize=True)
                 gif(ruta, d, ahora, os.path.join(SALIDA, f"{ruta['n']:03d}.gif"))
+                pf = os.path.join(AQUI, 'data', 'perfiles', f"{ruta['n']:03d}.json")
+                if os.path.exists(pf):
+                    from perfil_clima import perfil_gif
+                    perfil_gif(ruta, json.load(open(pf)), ahora, os.path.join(SALIDA, f"{ruta['n']:03d}-perfil.gif"))
                 ok += 1
             except Exception:
                 errores.append(f"ruta {ruta['n']}: " + traceback.format_exc())
