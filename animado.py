@@ -6,7 +6,7 @@ from pronostico import fuente, color_t, tenue, CORTA, WMO
 def gif(ruta, d, ahora, destino):
     D = d['daily']; H = d['hourly']; nd = len(D['time'])
     W, Hh = 600, 360
-    L, R, T, B = 46, W - 20, 128, 250           # área de temperaturas
+    L, R, T, B = 46, W - 20, 146, 250           # área de temperaturas
     VT, VB = 258, 292                           # franja de ráfagas
     tx = [v if v is not None else 0 for v in D['temperature_2m_max']]
     tn = [v if v is not None else 0 for v in D['temperature_2m_min']]
@@ -30,8 +30,14 @@ def gif(ruta, d, ahora, destino):
         g.text((cx(2) - 6, VB + 22), 'aceptable', font=FS, fill=(200, 170, 90))
         g.text((cx(9), VB + 22), 'tendencia: puede cambiar mucho', font=FS, fill=(200, 120, 90))
         # línea de 0 °C
-        if lo < 0 < hi:
-            g.line((L, ty(0), R, ty(0)), fill=(90, 120, 160)); g.text((8, ty(0) - 8), '0°', font=FS, fill=(140, 180, 220))
+        # escala de temperatura (°C) a la izquierda
+        g.text((L, T - 22), 'Temperatura en la ' + ('cumbre' if lugar == 'Cumbre' else 'zona más alta') + ' (°C): mínima a máxima', font=FS, fill=(170, 170, 170))
+        paso = 5 if hi - lo <= 30 else 10
+        for t in range(int(lo // paso * paso), int(hi) + 1, paso):
+            if t < lo: continue
+            y = ty(t)
+            g.line((L, y, R, y), fill=(90, 120, 160) if t == 0 else (48, 52, 58))
+            g.text((8, y - 7), f'{t}°', font=FS, fill=(140, 180, 220) if t == 0 else (130, 130, 130))
         for k in range(nd):
             f = 1 if k < 2 else 0.85 if k < 7 else 0.6
             x = cx(k)
@@ -70,6 +76,6 @@ def gif(ruta, d, ahora, destino):
         p = f"Nieve {nv[k]:.0f} cm" if nv[k] >= 0.5 else (f"Lluvia {pr[k]:.0f} mm" if pr[k] >= 0.5 else 'Sin precipitación')
         g.text((160, 86), p, font=F, fill=(190, 225, 255) if nv[k] >= 0.5 else (220, 220, 220))
         fl = [v for t, v in zip(H['time'], H['freezing_level_height']) if t.startswith(D['time'][k]) and v is not None]
-        if fl: g.text((380, 44), f"0 °C desde {round(min(fl), -2):.0f} m", font=F, fill=(180, 210, 255))
+        if fl: g.text((380, 44), f"Hiela desde los {round(min(fl), -2):.0f} m", font=F, fill=(180, 210, 255))
         frames.append(im.convert('P', palette=Image.ADAPTIVE, colors=128)); dur.append(2200 if k < 2 else 1300)
     frames[0].save(destino, save_all=True, append_images=frames[1:], duration=dur, loop=0, optimize=True)
