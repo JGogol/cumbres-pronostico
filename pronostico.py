@@ -136,6 +136,8 @@ def main():
                 if os.path.exists(pf):
                     from perfil_clima import perfil_gif
                     perfil_gif(ruta, json.load(open(pf)), ahora, os.path.join(SALIDA, f"{ruta['n']:03d}-perfil.gif"))
+                    from altura_hora import altura_hora_gif
+                    altura_hora_gif(ruta, json.load(open(pf)), ahora, os.path.join(SALIDA, f"{ruta['n']:03d}-altura.gif"))
                 ok += 1
             except Exception:
                 errores.append(f"ruta {ruta['n']}: " + traceback.format_exc())
