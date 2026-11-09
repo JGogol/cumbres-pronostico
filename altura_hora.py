@@ -58,6 +58,10 @@ class Datos:
         self.nieve = [v or 0 for v in d[-1]['hourly']['snowfall'][:nh]]
         self.raf = [v or 0 for v in d[-1]['hourly']['wind_gusts_10m'][:nh]]
         self.G = [[v or 0 for v in x['hourly']['wind_gusts_10m'][:nh]] for x in d]
+        self.dir = [v or 0 for v in d[-1]['hourly']['wind_direction_10m'][:nh]]
+        self.dir_base = [v or 0 for v in d[0]['hourly']['wind_direction_10m'][:nh]]
+        self.sens = [v if v is not None else 0 for v in d[-1]['hourly']['apparent_temperature'][:nh]]
+        self.lluvia_h = [x['hourly']['precipitation'] for x in d]
         self.lluvia = [max(x['hourly']['precipitation'][h] or 0 for x in d) for h in range(nh)]
         self.wcode = [max(x['hourly']['weather_code'][h] or 0 for x in d) for h in range(nh)]
         self.sol = {t: (int(a[11:13]) + int(a[14:16]) / 60, int(b[11:13]) + int(b[14:16]) / 60)
@@ -287,6 +291,53 @@ def detalle_png(ruta, D, ahora, destino):
     im.save(destino, optimize=True)
 
 
+PUNTOS = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO']
+
+
+def rumbo(grados):
+    return PUNTOS[int((grados % 360) / 45 + 0.5) % 8]
+
+
+def flecha(g, cx, cy, grados, largo=7, color=(20, 20, 20)):
+    import math
+    a = math.radians(grados + 180)  # hacia dónde sopla
+    dx, dy = math.sin(a) * largo, -math.cos(a) * largo
+    g.line((cx - dx, cy - dy, cx + dx, cy + dy), fill=color, width=2)
+    px, py = cx + dx, cy + dy; b = math.radians(25)
+    for s_ in (1, -1):
+        ang = a + math.pi + s_ * b
+        g.line((px, py, px + math.sin(ang) * 5, py - math.cos(ang) * 5), fill=color, width=2)
+
+
+def resumen(D, h0, h1, sale, pone):
+    """Texto corto del día armado a partir de los datos horarios."""
+    def tramo(hs):
+        if not hs: return ''
+        a, b = hs[0] - h0, hs[-1] - h0 + 1
+        if b - a >= 20: return 'todo el día'
+        nombre = lambda x: 'la madrugada' if x < 6 else 'la mañana' if x < 12 else 'la tarde' if x < 19 else 'la noche'
+        return f'de {a} a {b} h' if b - a <= 6 else f'desde {nombre(a)} hasta {nombre(b - 1)}' if nombre(a) != nombre(b - 1) else f'durante {nombre(a)}'
+    frases = []
+    nieve = [h for h in range(h0, h1) if D.nieve[h] > 0.05]
+    lluvia = [h for h in range(h0, h1) if D.lluvia[h] > 0.1 and D.nieve[h] <= 0.05]
+    tormenta = [h for h in range(h0, h1) if D.wcode[h] >= 95]
+    fuerte = [h for h in range(h0, h1) if D.raf[h] >= 60]
+    if tormenta: frases.append('Tormentas ' + tramo(tormenta))
+    if nieve: frases.append(('Nevadas débiles ' if sum(D.nieve[h] for h in nieve) < 2 else 'Nevadas ') + tramo(nieve))
+    if lluvia: frases.append('Lluvia ' + tramo(lluvia))
+    if not (tormenta or nieve or lluvia):
+        nub = sum(1 for h in range(h0, h1) if D.wcode[h] >= 3)
+        frases.append('Despejado' if nub < 5 else 'Nubosidad variable, sin precipitación' if nub < 15 else 'Nublado, sin precipitación')
+    if fuerte: frases.append('ráfagas fuertes en la cumbre ' + tramo(fuerte))
+    else: frases.append('viento moderado' if max(D.raf[h0:h1]) >= 30 else 'poco viento')
+    noche = [h for h in range(h0, h1) if int(D.horas[h][11:13]) < 7]
+    if noche:
+        dn = D.dir_base[noche[len(noche) // 2]]
+        frases.append(f'de noche, abajo, viento del {rumbo(dn)}')
+    t = '. '.join(f[0].upper() + f[1:] for f in frases[:1]) + ('; ' + '; '.join(frases[1:]) if len(frases) > 1 else '') + '.'
+    return t
+
+
 NIEVE_C = (71, 73, 75, 77, 85, 86)
 LLUVIA_C = (51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82)
 TEXTO = {0: 'despejado', 1: 'despejado', 2: 'parcial', 3: 'nublado', 45: 'niebla', 48: 'niebla',
@@ -321,7 +372,7 @@ def simbolo(g, cx, cy, code, de_noche, s=9):
 
 def dia_png(ruta, D, ahora, k, destino):
     """Un día completo, hora por hora, en toda la ruta."""
-    W, H = 600, 498
+    W, H = 600, 600
     F, FB, FS, FG = fuente(13), fuente(17, True), fuente(12), fuente(22, True)
     im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
@@ -343,25 +394,28 @@ def dia_png(ruta, D, ahora, k, destino):
     if gra: partes.append('granizo')
     elif tor: partes.append('tormenta eléctrica')
     g.text((14, 64), ' · '.join(partes).capitalize(), font=F, fill=(255, 130, 120) if rm >= 60 or tor else (210, 210, 210))
+    import textwrap
+    for j, linea in enumerate(textwrap.wrap(resumen(D, h0, h1, sale, pone), 88)[:3]):
+        g.text((14, 84 + j * 16), linea, font=FS, fill=(225, 225, 225))
     mf = D.mejor_franja(fe, ruta.get('horas'))
     if mf:
-        g.text((14, 84), f"Mejor franja {mf[1]}–{mf[2]} h: condiciones {PLURAL[mf[0]]}", font=F, fill=NOTAS[mf[0]][1])
+        g.text((14, 134), f"Mejor franja {mf[1]}–{mf[2]} h: condiciones {PLURAL[mf[0]]}", font=F, fill=NOTAS[mf[0]][1])
     x0, x1 = 58, W - 34
     X = lambda hh: x0 + hh * (x1 - x0) / 24
     # fila 1: calificación por hora
-    yb = 108
+    yb = 160
     g.text((4, yb - 1), 'condic.', font=fuente(11), fill=(170, 170, 170))
     for hh in range(24): g.rectangle((X(hh), yb, X(hh + 1) - 1, yb + 10), fill=NOTAS[D.nota_hora(h0 + hh)][1])
     if mf: g.rectangle((X(mf[1]), yb - 2, X(mf[2]), yb + 12), outline=(255, 255, 255), width=2)
     # fila 2: símbolos del tiempo
-    ys = 136
+    ys = 188
     g.text((4, ys - 6), 'tiempo', font=fuente(11), fill=(170, 170, 170))
     for hh in range(24):
         noche = hh + 0.5 < sale or hh + 0.5 > pone
         if noche: g.rectangle((X(hh), ys - 12, X(hh + 1), ys + 14), fill=(26, 28, 34))
         simbolo(g, (X(hh) + X(hh + 1)) / 2, ys, D.wcode[h0 + hh], noche, 7)
     # fila 3: precipitación (mm/h, barras)
-    yp0, yp1 = 156, 176
+    yp0, yp1 = 208, 228
     g.text((4, yp0 + 3), 'precip.', font=fuente(11), fill=(170, 170, 170))
     g.rectangle((x0, yp0, x1, yp1), fill=(38, 40, 46))
     for hh in range(24):
@@ -372,7 +426,7 @@ def dia_png(ruta, D, ahora, k, destino):
             g.rectangle((X(hh) + 2, yp1 - alto, X(hh + 1) - 2, yp1), fill=c)
             if mm >= 0.5: g.text((X(hh) + 1, yp0 - 1), f'{mm:.0f}', font=fuente(10), fill=(220, 230, 255))
     # panel principal: temperatura por altura, 0 °C y ráfagas
-    y0, y1 = 190, 340
+    y0, y1 = 242, 392
     panel(g, D, x0, y0, x1, y1, h0, h1, 3)
     ejes_altura(g, D, 4, y0, y1, FS, cumbre)
     for hh in range(1, 24, 3):
@@ -380,11 +434,22 @@ def dia_png(ruta, D, ahora, k, destino):
         for i, yy in ((len(D.alts) - 1, y0 + 4), (0, y1 - 18)):
             t = D.T[i][h]; tx = f'{round(t)}°'
             g.text((x - g.textlength(tx, font=F) / 2, yy), tx, font=F, fill=(15, 15, 15) if t > -4 else (240, 240, 240))
-    franja_viento(g, D, x0, y1 + 4, x1, h0, h1, FS, numeros_cada=3)
-    g.text((4, y1 + 5), 'viento', font=FS, fill=(200, 200, 200))
+    franja_viento(g, D, x0, y1 + 4, x1, h0, h1, FS)
+    g.rectangle((x0, y1 + 20, x1, y1 + 38), fill=(42, 44, 50))
+    for hh in range(1, 24, 3):
+        h = h0 + hh; x = (X(hh) + X(hh + 1)) / 2
+        tx = f'{round(D.raf[h])}'; g.text((x - g.textlength(tx, font=FS) / 2, y1 + 5), tx, font=FS, fill=(20, 20, 20))
+        flecha(g, x - 9, y1 + 29, D.dir[h], 6, (230, 230, 230))
+        g.text((x - 1, y1 + 22), rumbo(D.dir[h]), font=FS, fill=(230, 230, 230))
+        st = D.sens[h]; tx = f'{round(st)}°'
+        g.text((x - g.textlength(tx, font=F) / 2, y1 + 42), tx, font=F, fill=(150, 200, 255) if st < 0 else (230, 230, 230))
+    g.text((4, y1 + 5), 'ráfagas', font=fuente(11), fill=(200, 200, 200))
+    g.text((4, y1 + 23), 'viene del', font=fuente(11), fill=(200, 200, 200))
+    g.text((4, y1 + 43), 'sensación', font=fuente(11), fill=(200, 200, 200))
     for hh in (0, 3, 6, 9, 12, 15, 18, 21):
-        g.text((X(hh) - 6, y1 + 22), f'{hh}h', font=FS, fill=(170, 170, 170))
-    leyendas(g, W, y1 + 42, F, FS)
+        g.text((X(hh) - 6, y1 + 62), f'{hh}h', font=FS, fill=(170, 170, 170))
+    g.text((x0, y1 + 78), 'Viento y sensación térmica en la cumbre. "Viene del": dirección de la que sopla (útil para orientar la carpa).', font=fuente(11), fill=(150, 150, 150))
+    leyendas(g, W, y1 + 98, F, FS)
     g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     marca(im, (x0, y0, x1, y1)).save(destino, optimize=True)
 
