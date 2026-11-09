@@ -73,8 +73,9 @@ class Datos:
         g = self.raf[h]; p = self.lluvia[h]; w = self.wcode[h]; t = self.T[-1][h]
         sens = t - 0.2 * g  # aproximación simple de sensación térmica en la cumbre
         if w >= 95 or g > 80 or self.nieve[h] >= 1.5: return 4
-        if g > 60 or p >= 0.5 or sens < -15: return 3
-        if g > 45 or p > 0 or w in (71, 73, 75, 85, 86, 61, 63, 65, 80, 81, 82): return 2
+        tmax = max(self.T[i][h] for i in range(len(self.alts)))  # calor: el punto más caluroso de la ruta
+        if g > 60 or p >= 0.5 or sens < -15 or tmax >= 35: return 3
+        if g > 45 or p > 0 or tmax >= 32 or w in (71, 73, 75, 85, 86, 61, 63, 65, 80, 81, 82): return 2
         if g > 30: return 1
         return 0
 
@@ -328,6 +329,10 @@ def resumen(D, h0, h1, sale, pone):
     if not (tormenta or nieve or lluvia):
         nub = sum(1 for h in range(h0, h1) if D.wcode[h] >= 3)
         frases.append('Despejado' if nub < 5 else 'Nubosidad variable, sin precipitación' if nub < 15 else 'Nublado, sin precipitación')
+    tcal = max(max(D.T[i][h0:h1]) for i in range(len(D.alts)))
+    if tcal >= 32:
+        calor = [h for h in range(h0, h1) if max(D.T[i][h] for i in range(len(D.alts))) >= 32]
+        frases.append(f'calor fuerte (hasta {round(tcal)} °C) ' + tramo(calor) + '; llevá agua extra')
     if fuerte: frases.append('ráfagas fuertes en la cumbre ' + tramo(fuerte))
     else: frases.append('viento moderado' if max(D.raf[h0:h1]) >= 30 else 'poco viento')
     noche = [h for h in range(h0, h1) if int(D.horas[h][11:13]) < 7]
@@ -462,7 +467,4 @@ def altura_hora(ruta, perfil, ahora, carpeta):
     semana_png(ruta, D, ahora, os.path.join(sub, 'semana.png'))
     for k in range(DIAS):
         dia_png(ruta, D, ahora, k, os.path.join(sub, f'dia{k + 1}.png'))
-    # compatibilidad con la versión anterior de la página
-    semana_png(ruta, D, ahora, os.path.join(carpeta, f'{n}-semana.png'))
-    detalle_png(ruta, D, ahora, os.path.join(carpeta, f'{n}-detalle.png'))
     return D
