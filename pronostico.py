@@ -115,14 +115,29 @@ def main():
         rutas = [r for r in rutas if r['n'] in {int(a) for a in sys.argv[1:]}]
     os.makedirs(SALIDA, exist_ok=True)
     ahora = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-3)))
-    ok = 0
-    for i in range(0, len(rutas), 40):
-        lote = rutas[i:i + 40]
-        for ruta, d in zip(lote, pedir(lote)):
-            dibujar(ruta, d, ahora).save(os.path.join(SALIDA, f"{ruta['n']:03d}.png"), optimize=True)
-            from animado import gif
-            gif(ruta, d, ahora, os.path.join(SALIDA, f"{ruta['n']:03d}.gif"))
-            ok += 1
+    import traceback, time
+    from animado import gif
+    ok, errores = 0, []
+    for i in range(0, len(rutas), 20):
+        lote = rutas[i:i + 20]
+        try:
+            datos = pedir(lote)
+        except Exception:
+            time.sleep(20)
+            try:
+                datos = pedir(lote)
+            except Exception:
+                errores.append(f'lote {i}: ' + traceback.format_exc()); continue
+        for ruta, d in zip(lote, datos):
+            try:
+                dibujar(ruta, d, ahora).save(os.path.join(SALIDA, f"{ruta['n']:03d}.png"), optimize=True)
+                gif(ruta, d, ahora, os.path.join(SALIDA, f"{ruta['n']:03d}.gif"))
+                ok += 1
+            except Exception:
+                errores.append(f"ruta {ruta['n']}: " + traceback.format_exc())
+        time.sleep(2)
+    open(os.path.join(AQUI, 'site', 'log.txt'), 'w', encoding='utf-8').write(
+        f'{ahora:%d/%m/%Y %H:%M} · {ok} rutas OK · {len(errores)} errores\n\n' + '\n'.join(errores))
     open(os.path.join(AQUI, 'site', 'index.html'), 'w', encoding='utf-8').write(
         '<!doctype html><meta charset="utf-8"><title>Pronósticos Cumbres Digitales</title>'
         f'<p>Imágenes de pronóstico por ruta, actualizadas {ahora:%d/%m/%Y %H:%M}. '
