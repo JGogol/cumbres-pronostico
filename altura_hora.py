@@ -138,19 +138,16 @@ def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
                     xb = prev[0] + (x - prev[0]) * (t + 0.3); yb = prev[1] + (y - prev[1]) * (t + 0.3)
                     g.line((xa, ya, xb, yb), fill=(255, 255, 255), width=2)
         prev = (x, y, est)
-    # línea de viento fuerte: altura desde donde las ráfagas superan 60 km/h
-    prev = None
-    for h in range(h0, h1):
-        x = x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0)
-        z = D.viento(h)
-        if z is None: prev = None; continue
-        y = y1 - 1 if z == 'abajo' else y1 - (z - a0) / (a1 - a0) * (y1 - y0)
-        if prev:
-            for t in (0.0, 0.5):
-                xa = prev[0] + (x - prev[0]) * t; ya = prev[1] + (y - prev[1]) * t
-                xb = prev[0] + (x - prev[0]) * (t + 0.35); yb = prev[1] + (y - prev[1]) * (t + 0.35)
-                g.line((xa, ya, xb, yb), fill=(235, 60, 60), width=3)
-        prev = (x, y)
+    # curva de ráfagas en la cumbre con escala propia a la derecha (0-100 km/h)
+    vy = lambda v: y1 - min(v, 100) / 100 * (y1 - y0)
+    pts = [(x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0), vy(D.raf[h])) for h in range(h0, h1)]
+    if len(pts) > 1:
+        g.line(pts, fill=(20, 20, 20), width=5)
+        g.line(pts, fill=(255, 120, 60), width=3)
+    for v, c in ((0, (70, 170, 90)), (30, (225, 190, 60)), (60, (225, 70, 60)), (90, (225, 70, 60))):
+        y = vy(v); g.line((x1, y, x1 + 4, y), fill=c, width=2)
+        g.text((x1 + 6, y - 7), f'{v}', font=fuente(11), fill=c)
+    g.text((x1 + 2, y0 - 2 - 13), 'km/h', font=fuente(10), fill=(255, 140, 80))
     # escala de altura: guías cada 250 m
     paso = 250 if a1 - a0 <= 2000 else 500
     for a in range((int(a0) // paso + 1) * paso, int(a1), paso):
@@ -176,15 +173,17 @@ def franja_viento(g, D, x0, y0, x1, h0, h1, F, numeros_cada=None):
 
 
 def leyendas(g, W, y, F, FS):
-    g.text((14, y), '— 0 °C (punteada: no hiela)', font=FS, fill=(230, 230, 230))
-    g.text((190, y), '- - ráfagas ≥60 arriba de', font=FS, fill=(240, 90, 90))
-    g.text((350, y), '* nieve', font=FS, fill=(220, 240, 255))
-    x = 14; y += 18
+    g.text((14, y), '— 0 °C (punteada: no hiela en la ruta)', font=FS, fill=(230, 230, 230))
+    g.line((262, y + 7, 290, y + 7), fill=(255, 120, 60), width=3)
+    g.text((296, y), 'ráfagas en la cumbre (escala derecha, km/h)', font=FS, fill=(255, 150, 100))
+    y += 18; x = 14
+    g.text((x, y), 'Condiciones:', font=FS, fill=(200, 200, 200)); x += 4 + g.textlength('Condiciones:', font=FS)
     for nombre, c in NOTAS:
         g.rectangle((x, y + 2, x + 10, y + 12), fill=c); g.text((x + 13, y), nombre, font=FS, fill=(200, 200, 200))
         x += 22 + g.textlength(nombre, font=FS)
+    g.text((x + 4, y), '* nieve', font=FS, fill=(220, 240, 255))
     y += 18; x = 14
-    g.text((x, y), 'Ráfagas en la cumbre:', font=FS, fill=(200, 200, 200)); x += 132
+    g.text((x, y), 'Franja de viento:', font=FS, fill=(200, 200, 200)); x += 6 + g.textlength('Franja de viento:', font=FS)
     for c, t in (((70, 170, 90), '<30'), ((225, 190, 60), '30-60'), ((225, 70, 60), '>60 km/h')):
         g.rectangle((x, y + 2, x + 10, y + 12), fill=c); g.text((x + 13, y), t, font=FS, fill=(200, 200, 200))
         x += 22 + g.textlength(t, font=FS)
@@ -207,7 +206,7 @@ def semana_png(ruta, D, ahora, destino):
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
     g.text((14, 8), ruta['nombre'][:44], font=FB, fill=(240, 240, 240))
     g.text((14, 30), 'Próximos 7 días en toda la ruta · condiciones pronosticadas en la mejor franja de luz', font=FS, fill=(170, 170, 170))
-    x0, x1, y0, y1 = 58, W - 14, 118, 308
+    x0, x1, y0, y1 = 58, W - 34, 118, 308
     nh = len(D.horas)
     panel(g, D, x0, y0, x1, y1, 0, nh, 3)
     ejes_altura(g, D, 4, y0, y1, FS, cumbre)
@@ -259,7 +258,7 @@ def detalle_png(ruta, D, ahora, destino):
         nv = sum(D.nieve[h0:h1]); rm = max(D.raf[h0:h1])
         info = f"Ráfagas en la cumbre hasta {round(rm)} km/h" + (f" · nieve {nv:.0f} cm" if nv >= 0.5 else '')
         g.text((14 + g.textlength(nom, font=FG) + 12, y + 8), info, font=FS, fill=(255, 130, 120) if rm >= 60 else (210, 210, 210))
-        x0, x1, y0, y1 = 58, W - 14, y + 60, y + 200
+        x0, x1, y0, y1 = 58, W - 34, y + 60, y + 200
         for hh in range(24):
             xa = x0 + hh * (x1 - x0) / 24; xb = x0 + (hh + 1) * (x1 - x0) / 24
             g.rectangle((xa, y0 - 14, xb - 1, y0 - 4), fill=NOTAS[D.nota_hora(h0 + hh)][1])
