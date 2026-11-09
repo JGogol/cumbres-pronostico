@@ -5,6 +5,8 @@ on:
     - cron: '0 8 * * *'    # 05:00 hora de Mendoza
     - cron: '0 20 * * *'   # 17:00 hora de Mendoza (actualiza para "mañana")
   workflow_dispatch:
+  push:
+    branches: [master]
 
 permissions:
   contents: read
