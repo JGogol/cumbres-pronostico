@@ -55,7 +55,7 @@ def marca(im, caja):
 def png(im, destino):
     """PNG con paleta de 256 colores: ~60 % menos peso, sin diferencia visible (deploy de Pages más liviano)."""
     from PIL import Image as _I
-    im.convert('RGB').quantize(colors=256, method=_I.Quantize.MAXCOVERAGE, dither=_I.Dither.NONE).save(destino, optimize=True)
+    im.convert('RGB').quantize(colors=256, method=_I.Quantize.MAXCOVERAGE, kmeans=3, dither=_I.Dither.NONE).save(destino, optimize=True)
 
 
 def interp(km, xs, ys):
