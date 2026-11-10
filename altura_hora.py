@@ -221,10 +221,10 @@ def leyendas(g, W, y, F, FS):
         xx = LX0 + (t + 20) / 50 * (LX1 - LX0); g.text((xx - 8, y2 + 10), f'{t}°', font=FS, fill=(160, 160, 160))
 
 
-def ejes_altura(g, D, x, y0, y1, FS, cumbre, yc=None):
+def ejes_altura(g, D, x, y0, y1, FS, cumbre, yc=None, base='largada'):
     yc = y0 if yc is None else yc
     g.text((x, yc - (6 if yc > y0 + 6 else 0)), f'{D.a1}', font=FS, fill=(210, 210, 210)); g.text((x, yc + 7), cumbre, font=FS, fill=(140, 140, 140))
-    g.text((x, y1 - 26), 'largada', font=FS, fill=(140, 140, 140)); g.text((x, y1 - 13), f'{D.a0}', font=FS, fill=(210, 210, 210))
+    g.text((x, y1 - 26), base, font=FS, fill=(140, 140, 140)); g.text((x, y1 - 13), f'{D.a0}', font=FS, fill=(210, 210, 210))
 
 
 def semana_png(ruta, D, ahora, destino):
@@ -233,11 +233,11 @@ def semana_png(ruta, D, ahora, destino):
     g_im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(g_im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
     g.text((14, 8), ruta['nombre'][:44], font=FB, fill=(240, 240, 240))
-    g.text((14, 30), 'Próximos 7 días en toda la ruta · condiciones pronosticadas en la mejor franja de luz', font=FS, fill=(170, 170, 170))
+    g.text((14, 30), ruta.get('sub_semana', 'Próximos 7 días en toda la ruta · condiciones pronosticadas en la mejor franja de luz'), font=FS, fill=(170, 170, 170))
     x0, x1, y0, y1 = 58, W - 34, 118, 308
     nh = len(D.horas)
     yc = panel(g, D, x0, y0, x1, y1, 0, nh, 3)
-    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc)
+    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc, ruta.get('base_txt', 'largada'))
     fechas = sorted({h[:10] for h in D.horas})[:DIAS]
     cw = (x1 - x0) / DIAS
     for i, fe in enumerate(fechas):
@@ -262,7 +262,7 @@ def semana_png(ruta, D, ahora, destino):
         xc = x0 + (i + 0.5) * cw; s = f'máx {round(rm)}'
         g.text((xc - g.textlength(s, font=FS) / 2, y1 + 5), s, font=FS, fill=(20, 20, 20))
     g.text((4, y1 + 5), 'viento', font=FS, fill=(200, 200, 200))
-    g.text((x0, y1 + 24), f"franja = {ruta.get('horas') or '?'} h de recorrido con luz · arriba máx/mín cumbre, abajo largada", font=FS, fill=(150, 150, 150))
+    g.text((x0, y1 + 24), ruta.get('nota_semana') or f"franja = {ruta.get('horas') or '?'} h de recorrido con luz · arriba máx/mín cumbre, abajo largada", font=FS, fill=(150, 150, 150))
     leyendas(g, W, y1 + 46, F, FS)
     g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     marca(g_im, (x0, y0, x1, y1)).save(destino, optimize=True)
@@ -458,7 +458,7 @@ def dia_png(ruta, D, ahora, k, destino):
     # panel principal: temperatura por altura, 0 °C y ráfagas
     y0, y1 = 260, 410
     yc = panel(g, D, x0, y0, x1, y1, h0, h1, 3)
-    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc)
+    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc, ruta.get('base_txt', 'largada'))
     for hh in range(1, 24, 3):
         h = h0 + hh; x = (X(hh) + X(hh + 1)) / 2
         for i, yy in ((len(D.alts) - 1, yc + 4), (0, y1 - 18)):

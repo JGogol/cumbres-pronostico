@@ -137,7 +137,7 @@ def guardar_historial(n, ahora, datos):
 def main():
     rutas = json.load(open(os.path.join(AQUI, 'data', 'rutas.json'), encoding='utf-8'))
     if len(sys.argv) > 1:
-        rutas = [r for r in rutas if r['n'] in {int(a) for a in sys.argv[1:]}]
+        rutas = [r for r in rutas if str(r['n']) in sys.argv[1:] or f"{r['n']:03d}" in sys.argv[1:]]
     os.makedirs(SALIDA, exist_ok=True)
     ahora = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-3)))
     import traceback, time
@@ -171,8 +171,16 @@ def main():
             except Exception:
                 errores.append(f"ruta {ruta['n']}: " + traceback.format_exc().strip().splitlines()[-1] + rescatar(ruta['n']))
         time.sleep(1)
+    if len(sys.argv) == 1 or 'cerros' in sys.argv:
+        try:
+            from cerros import generar
+            okc, errc = generar(ahora); errores += errc
+        except Exception:
+            okc = 0; errores.append('cerros: ' + traceback.format_exc().strip().splitlines()[-1])
+    else:
+        okc = 0
     open(os.path.join(AQUI, 'site', 'log.txt'), 'w', encoding='utf-8').write(
-        f'{ahora:%d/%m/%Y %H:%M} · {ok} rutas OK · {len(errores)} errores\n\n' + '\n'.join(errores))
+        f'{ahora:%d/%m/%Y %H:%M} · {ok} rutas OK · {okc} cerros OK · {len(errores)} errores\n\n' + '\n'.join(errores))
     open(os.path.join(AQUI, 'site', 'index.html'), 'w', encoding='utf-8').write(
         '<!doctype html><meta charset="utf-8"><title>Pronósticos Cumbres Digitales</title>'
         f'<p>Imágenes de pronóstico por ruta, actualizadas {ahora:%d/%m/%Y %H:%M}. '

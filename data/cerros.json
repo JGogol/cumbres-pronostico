@@ -1,0 +1,1002 @@
+[
+{
+"id": "c001",
+"nombre": "Cerro Llullaillaco",
+"prov": "Salta",
+"lat": -24.7199,
+"lon": -68.53655,
+"alt": 6745,
+"base": 4245,
+"slug": "cerro-llullaillaco"
+},
+{
+"id": "c002",
+"nombre": "Cerro Cachi o El Libertador",
+"prov": "Salta",
+"lat": -24.93242,
+"lon": -66.39049,
+"alt": 6350,
+"base": 3850,
+"slug": "cerro-cachi-o-el-libertador"
+},
+{
+"id": "c003",
+"nombre": "Cerro Palermo",
+"prov": "Salta",
+"lat": -24.8325,
+"lon": -66.405,
+"alt": 6170,
+"base": 3670,
+"slug": "cerro-palermo"
+},
+{
+"id": "c004",
+"nombre": "Cerro Quewar",
+"prov": "Salta",
+"lat": -24.30832,
+"lon": -66.7325,
+"alt": 6154,
+"base": 3654,
+"slug": "cerro-quewar"
+},
+{
+"id": "c005",
+"nombre": "Cerro Sarapo",
+"prov": "Salta",
+"lat": -10.30412,
+"lon": -76.89466,
+"alt": 6127,
+"base": 3627,
+"slug": "cerro-sarapo"
+},
+{
+"id": "c006",
+"nombre": "Cerro Aracar",
+"prov": "Salta",
+"lat": -24.29,
+"lon": -67.78333,
+"alt": 6091,
+"base": 3591,
+"slug": "cerro-aracar"
+},
+{
+"id": "c007",
+"nombre": "Cerro Salin",
+"prov": "Salta",
+"lat": -24.32813,
+"lon": -68.06773,
+"alt": 6038,
+"base": 3538,
+"slug": "cerro-salin"
+},
+{
+"id": "c008",
+"nombre": "Volcán Socompa",
+"prov": "Salta",
+"lat": -24.39611,
+"lon": -68.24564,
+"alt": 6030,
+"base": 3530,
+"slug": "volcan-socompa"
+},
+{
+"id": "c009",
+"nombre": "Cerro Pilar de los Pailas (Luracatao)",
+"prov": "Salta",
+"lat": -25.13833,
+"lon": -66.6225,
+"alt": 5920,
+"base": 3420,
+"slug": "cerro-pilar-de-los-pailas-luracatao"
+},
+{
+"id": "c010",
+"nombre": "Cerro Azufre",
+"prov": "Salta",
+"lat": -24.3985,
+"lon": -66.7784,
+"alt": 5787,
+"base": 3287,
+"slug": "cerro-azufre"
+},
+{
+"id": "c011",
+"nombre": "Cerro Chañi",
+"prov": "Jujuy",
+"lat": -24.0628,
+"lon": -65.7456,
+"alt": 5897,
+"base": 3397,
+"slug": "cerro-chani"
+},
+{
+"id": "c012",
+"nombre": "Cerro Tinte",
+"prov": "Jujuy",
+"lat": -22.6551,
+"lon": -67.0137,
+"alt": 5849,
+"base": 3349,
+"slug": "cerro-tinte"
+},
+{
+"id": "c013",
+"nombre": "Cerro San Pedro",
+"prov": "Jujuy",
+"lat": -22.9367,
+"lon": -66.9651,
+"alt": 5842,
+"base": 3342,
+"slug": "cerro-san-pedro"
+},
+{
+"id": "c014",
+"nombre": "Cerro Salle",
+"prov": "Jujuy",
+"lat": -22.4876,
+"lon": -66.7742,
+"alt": 5781,
+"base": 3281,
+"slug": "cerro-salle"
+},
+{
+"id": "c015",
+"nombre": "Cerro Morado",
+"prov": "Jujuy",
+"lat": -22.87287,
+"lon": -66.73182,
+"alt": 5758,
+"base": 3258,
+"slug": "cerro-morado"
+},
+{
+"id": "c016",
+"nombre": "Cerro Toma o Rosario",
+"prov": "Jujuy",
+"lat": -22.8358,
+"lon": -66.6273,
+"alt": 5719,
+"base": 3219,
+"slug": "cerro-toma-o-rosario"
+},
+{
+"id": "c017",
+"nombre": "Cerro Granada II",
+"prov": "Jujuy",
+"lat": -22.5576,
+"lon": -66.5449,
+"alt": 5696,
+"base": 3196,
+"slug": "cerro-granada-ii"
+},
+{
+"id": "c018",
+"nombre": "Cerro Vilama",
+"prov": "Jujuy",
+"lat": -22.5412,
+"lon": -66.9727,
+"alt": 5678,
+"base": 3178,
+"slug": "cerro-vilama"
+},
+{
+"id": "c019",
+"nombre": "Cerro Convento",
+"prov": "Jujuy",
+"lat": -22.9175,
+"lon": -66.5867,
+"alt": 5656,
+"base": 3156,
+"slug": "cerro-convento"
+},
+{
+"id": "c020",
+"nombre": "Cerro Zapaleri",
+"prov": "Jujuy",
+"lat": -22.8138,
+"lon": -67.1807,
+"alt": 5653,
+"base": 3153,
+"slug": "cerro-zapaleri"
+},
+{
+"id": "c021",
+"nombre": "Cerro Bolsón de los Cerillos",
+"prov": "Tucumán",
+"lat": -27.2132,
+"lon": -66.0937,
+"alt": 5519,
+"base": 3019,
+"slug": "cerro-bolson-de-los-cerillos"
+},
+{
+"id": "c022",
+"nombre": "Cerro Negro De la Laguna Verde",
+"prov": "Tucumán",
+"lat": -27.1115,
+"lon": -65.9887,
+"alt": 5095,
+"base": 2595,
+"slug": "cerro-negro-de-la-laguna-verde"
+},
+{
+"id": "c023",
+"nombre": "Cerro Zarzo",
+"prov": "Tucumán",
+"lat": -26.98874,
+"lon": -65.91641,
+"alt": 5012,
+"base": 2512,
+"slug": "cerro-zarzo"
+},
+{
+"id": "c024",
+"nombre": "Cerro Alto de la Mina",
+"prov": "Tucumán",
+"lat": -26.61584,
+"lon": -65.72538,
+"alt": 4760,
+"base": 3260,
+"slug": "cerro-alto-de-la-mina"
+},
+{
+"id": "c025",
+"nombre": "Cerro Quilmes o Negro de las Guayas",
+"prov": "Tucumán",
+"lat": -26.41943,
+"lon": -66.15992,
+"alt": 4602,
+"base": 3102,
+"slug": "cerro-quilmes-o-negro-de-las-guayas"
+},
+{
+"id": "c026",
+"nombre": "Cerro Negro de los Balcones",
+"prov": "Tucumán",
+"lat": -26.34385,
+"lon": -66.11395,
+"alt": 4503,
+"base": 3003,
+"slug": "cerro-negro-de-los-balcones"
+},
+{
+"id": "c027",
+"nombre": "Cerro Agua Caliente",
+"prov": "Tucumán",
+"lat": -26.21923,
+"lon": -66.09873,
+"alt": 4480,
+"base": 2980,
+"slug": "cerro-agua-caliente"
+},
+{
+"id": "c028",
+"nombre": "Cerro Mogote Ñuñorco de San Juan",
+"prov": "Tucumán",
+"lat": -26.82263,
+"lon": -65.87387,
+"alt": 4212,
+"base": 2712,
+"slug": "cerro-mogote-nunorco-de-san-juan"
+},
+{
+"id": "c029",
+"nombre": "Cerro Pabellón",
+"prov": "Tucumán",
+"lat": -26.14102,
+"lon": -65.69525,
+"alt": 4121,
+"base": 2621,
+"slug": "cerro-pabellon"
+},
+{
+"id": "c030",
+"nombre": "Cerro Alto de Huasca Ciénaga",
+"prov": "Tucumán",
+"lat": -26.50871,
+"lon": -66.17067,
+"alt": 4103,
+"base": 2603,
+"slug": "cerro-alto-de-huasca-cienaga"
+},
+{
+"id": "c031",
+"nombre": "Cerro Ojos del Salado",
+"prov": "Catamarca",
+"lat": -27.10917,
+"lon": -68.54083,
+"alt": 6891,
+"base": 4391,
+"slug": "cerro-ojos-del-salado"
+},
+{
+"id": "c032",
+"nombre": "Cerro Tres Cruces Sur",
+"prov": "Catamarca",
+"lat": -27.09867,
+"lon": -68.77823,
+"alt": 6748,
+"base": 4248,
+"slug": "cerro-tres-cruces-sur"
+},
+{
+"id": "c033",
+"nombre": "Cerro Cazadero Grande (Walther Penck, Tipas)",
+"prov": "Catamarca",
+"lat": -27.19629,
+"lon": -68.56069,
+"alt": 6678,
+"base": 4178,
+"slug": "cerro-cazadero-grande-walther-penck-tipas"
+},
+{
+"id": "c034",
+"nombre": "Cerro Incahuasi",
+"prov": "Catamarca",
+"lat": -27.03388,
+"lon": -68.29617,
+"alt": 6641,
+"base": 4141,
+"slug": "cerro-incahuasi"
+},
+{
+"id": "c035",
+"nombre": "Cerro El Muerto",
+"prov": "Catamarca",
+"lat": -27.05753,
+"lon": -68.4843,
+"alt": 6510,
+"base": 4010,
+"slug": "cerro-el-muerto"
+},
+{
+"id": "c036",
+"nombre": "Cerro Nacimiento Central",
+"prov": "Catamarca",
+"lat": -27.28085,
+"lon": -68.51299,
+"alt": 6471,
+"base": 3971,
+"slug": "cerro-nacimiento-central"
+},
+{
+"id": "c037",
+"nombre": "Cerro Antofalla",
+"prov": "Catamarca",
+"lat": -25.56284,
+"lon": -67.88109,
+"alt": 6450,
+"base": 3950,
+"slug": "cerro-antofalla"
+},
+{
+"id": "c038",
+"nombre": "Cerro El Cóndor (Volcán Sarmiento)",
+"prov": "Catamarca",
+"lat": -26.63167,
+"lon": -68.36167,
+"alt": 6430,
+"base": 3930,
+"slug": "cerro-el-condor-volcan-sarmiento"
+},
+{
+"id": "c039",
+"nombre": "Cerro Tres Quebradas o Patos",
+"prov": "Catamarca",
+"lat": -27.29939,
+"lon": -68.80788,
+"alt": 6239,
+"base": 3739,
+"slug": "cerro-tres-quebradas-o-patos"
+},
+{
+"id": "c040",
+"nombre": "Sierra Nevada",
+"prov": "Catamarca",
+"lat": -26.49083,
+"lon": -68.56,
+"alt": 6149,
+"base": 3649,
+"slug": "sierra-nevada"
+},
+{
+"id": "c041",
+"nombre": "Cerro Pissis",
+"prov": "La Rioja",
+"lat": -27.75482,
+"lon": -68.79885,
+"alt": 6818,
+"base": 4318,
+"slug": "cerro-pissis"
+},
+{
+"id": "c042",
+"nombre": "Cerro Bonete Chico",
+"prov": "La Rioja",
+"lat": -28.01725,
+"lon": -68.75528,
+"alt": 6759,
+"base": 4259,
+"slug": "cerro-bonete-chico"
+},
+{
+"id": "c043",
+"nombre": "Cerro Veladero",
+"prov": "La Rioja",
+"lat": -28.07296,
+"lon": -68.9772,
+"alt": 6436,
+"base": 3936,
+"slug": "cerro-veladero"
+},
+{
+"id": "c044",
+"nombre": "Cerro Reclus",
+"prov": "La Rioja",
+"lat": -27.91837,
+"lon": -68.93305,
+"alt": 6335,
+"base": 3835,
+"slug": "cerro-reclus"
+},
+{
+"id": "c045",
+"nombre": "Cerro Pissis Sureste",
+"prov": "La Rioja",
+"lat": -27.80571,
+"lon": -68.73186,
+"alt": 6135,
+"base": 3635,
+"slug": "cerro-pissis-sureste"
+},
+{
+"id": "c046",
+"nombre": "Cerro General Belgrano",
+"prov": "La Rioja",
+"lat": -29.01406,
+"lon": -67.82617,
+"alt": 6098,
+"base": 3598,
+"slug": "cerro-general-belgrano"
+},
+{
+"id": "c047",
+"nombre": "Cerro Bicentenario",
+"prov": "La Rioja",
+"lat": -27.9204,
+"lon": -68.75443,
+"alt": 6092,
+"base": 3592,
+"slug": "cerro-bicentenario"
+},
+{
+"id": "c048",
+"nombre": "Cerro Baboso",
+"prov": "La Rioja",
+"lat": -28.00832,
+"lon": -68.90972,
+"alt": 6070,
+"base": 3570,
+"slug": "cerro-baboso"
+},
+{
+"id": "c049",
+"nombre": "Cerro Peñas Azules",
+"prov": "La Rioja",
+"lat": -27.99245,
+"lon": -68.65283,
+"alt": 5950,
+"base": 3450,
+"slug": "cerro-penas-azules"
+},
+{
+"id": "c050",
+"nombre": "Cerro Bonete Grande",
+"prov": "La Rioja",
+"lat": -27.85084,
+"lon": -68.81887,
+"alt": 5879,
+"base": 3379,
+"slug": "cerro-bonete-grande"
+},
+{
+"id": "c051",
+"nombre": "Cerro Mercedario",
+"prov": "San Juan",
+"lat": -31.9789,
+"lon": -70.11243,
+"alt": 6720,
+"base": 4220,
+"slug": "cerro-mercedario"
+},
+{
+"id": "c052",
+"nombre": "Cerro La Ramada",
+"prov": "San Juan",
+"lat": -32.08286,
+"lon": -70.01794,
+"alt": 6370,
+"base": 3870,
+"slug": "cerro-la-ramada"
+},
+{
+"id": "c053",
+"nombre": "Cerro Olivares Central o De la Majadita",
+"prov": "San Juan",
+"lat": -30.41997,
+"lon": -69.78133,
+"alt": 6269,
+"base": 3769,
+"slug": "cerro-olivares-central-o-de-la-majadita"
+},
+{
+"id": "c054",
+"nombre": "Cerro Olivares del Limite",
+"prov": "San Juan",
+"lat": -30.29846,
+"lon": -69.90104,
+"alt": 6218,
+"base": 3718,
+"slug": "cerro-olivares-del-limite"
+},
+{
+"id": "c055",
+"nombre": "Cerro del Toro",
+"prov": "San Juan",
+"lat": -29.13023,
+"lon": -69.78735,
+"alt": 6168,
+"base": 3668,
+"slug": "cerro-del-toro"
+},
+{
+"id": "c056",
+"nombre": "Cerro Las Tórtolas",
+"prov": "San Juan",
+"lat": -29.93906,
+"lon": -69.90653,
+"alt": 6160,
+"base": 3660,
+"slug": "cerro-las-tortolas"
+},
+{
+"id": "c057",
+"nombre": "Cerro La Mesa",
+"prov": "San Juan",
+"lat": -32.06426,
+"lon": -70.11434,
+"alt": 6157,
+"base": 3657,
+"slug": "cerro-la-mesa"
+},
+{
+"id": "c058",
+"nombre": "Cerro Colanguil",
+"prov": "San Juan",
+"lat": -29.58879,
+"lon": -69.44939,
+"alt": 6122,
+"base": 3622,
+"slug": "cerro-colanguil"
+},
+{
+"id": "c059",
+"nombre": "Pico 2 de Ansilta",
+"prov": "San Juan",
+"lat": -31.6255,
+"lon": -69.87721,
+"alt": 5887,
+"base": 3387,
+"slug": "pico-2-de-ansilta"
+},
+{
+"id": "c060",
+"nombre": "Cerro El Potro",
+"prov": "San Juan",
+"lat": -28.39413,
+"lon": -69.62988,
+"alt": 5861,
+"base": 3361,
+"slug": "cerro-el-potro"
+},
+{
+"id": "c061",
+"nombre": "Cerro Aconcagua",
+"prov": "Mendoza",
+"lat": -32.65611,
+"lon": -70.01721,
+"alt": 6961,
+"base": 4461,
+"slug": "cerro-aconcagua"
+},
+{
+"id": "c062",
+"nombre": "Cerro Tupungato",
+"prov": "Mendoza",
+"lat": -33.35926,
+"lon": -69.77027,
+"alt": 6570,
+"base": 4070,
+"slug": "cerro-tupungato"
+},
+{
+"id": "c063",
+"nombre": "Cerro Alto San Juan",
+"prov": "Mendoza",
+"lat": -33.46925,
+"lon": -69.81486,
+"alt": 6125,
+"base": 3625,
+"slug": "cerro-alto-san-juan"
+},
+{
+"id": "c064",
+"nombre": "Cerro Marmolejo Sur",
+"prov": "Mendoza",
+"lat": -33.73426,
+"lon": -69.87849,
+"alt": 6108,
+"base": 3608,
+"slug": "cerro-marmolejo-sur"
+},
+{
+"id": "c065",
+"nombre": "Cerro Pabellón o Negro",
+"prov": "Mendoza",
+"lat": -33.45054,
+"lon": -69.70269,
+"alt": 6082,
+"base": 3582,
+"slug": "cerro-pabellon-o-negro"
+},
+{
+"id": "c066",
+"nombre": "Nevado del Plomo",
+"prov": "Mendoza",
+"lat": -33.10348,
+"lon": -70.06629,
+"alt": 6070,
+"base": 3570,
+"slug": "nevado-del-plomo"
+},
+{
+"id": "c067",
+"nombre": "Cerro Polleras",
+"prov": "Mendoza",
+"lat": -33.24551,
+"lon": -69.91744,
+"alt": 5993,
+"base": 3493,
+"slug": "cerro-polleras"
+},
+{
+"id": "c068",
+"nombre": "Cerro Plata",
+"prov": "Mendoza",
+"lat": -33.01539,
+"lon": -69.45462,
+"alt": 5968,
+"base": 3468,
+"slug": "cerro-plata"
+},
+{
+"id": "c069",
+"nombre": "Cerro Mogote Excelsior o Gemelos",
+"prov": "Mendoza",
+"lat": -33.06024,
+"lon": -69.5604,
+"alt": 5773,
+"base": 3273,
+"slug": "cerro-mogote-excelsior-o-gemelos"
+},
+{
+"id": "c070",
+"nombre": "Cerro Del Tambillo",
+"prov": "Mendoza",
+"lat": -32.30404,
+"lon": -69.6802,
+"alt": 5680,
+"base": 3180,
+"slug": "cerro-del-tambillo"
+},
+{
+"id": "c071",
+"nombre": "Cerro Domuyo",
+"prov": "Neuquén",
+"lat": -36.63775,
+"lon": -70.43245,
+"alt": 4709,
+"base": 3209,
+"slug": "cerro-domuyo"
+},
+{
+"id": "c072",
+"nombre": "Cerro Tromen",
+"prov": "Neuquén",
+"lat": -37.1409,
+"lon": -70.04889,
+"alt": 3978,
+"base": 2478,
+"slug": "cerro-tromen"
+},
+{
+"id": "c073",
+"nombre": "Cerro Lanín",
+"prov": "Neuquén",
+"lat": -39.63764,
+"lon": -71.50339,
+"alt": 3740,
+"base": 2240,
+"slug": "cerro-lanin"
+},
+{
+"id": "c074",
+"nombre": "Cerro Palao",
+"prov": "Neuquén",
+"lat": -36.86866,
+"lon": -70.29175,
+"alt": 3583,
+"base": 2083,
+"slug": "cerro-palao"
+},
+{
+"id": "c075",
+"nombre": "Cerro Chenque Mallín",
+"prov": "Neuquén",
+"lat": -36.6396,
+"lon": -70.29032,
+"alt": 3555,
+"base": 2055,
+"slug": "cerro-chenque-mallin"
+},
+{
+"id": "c076",
+"nombre": "Cerro Crestón",
+"prov": "Neuquén",
+"lat": -36.27075,
+"lon": -70.50605,
+"alt": 3550,
+"base": 2050,
+"slug": "cerro-creston"
+},
+{
+"id": "c077",
+"nombre": "Cerro Cochico",
+"prov": "Neuquén",
+"lat": -36.41214,
+"lon": -70.4216,
+"alt": 3537,
+"base": 2037,
+"slug": "cerro-cochico"
+},
+{
+"id": "c078",
+"nombre": "Cerro La Cruzada",
+"prov": "Neuquén",
+"lat": -36.7692,
+"lon": -70.28927,
+"alt": 3520,
+"base": 2020,
+"slug": "cerro-la-cruzada"
+},
+{
+"id": "c079",
+"nombre": "Cerro Negro del Tromen",
+"prov": "Neuquén",
+"lat": -37.22909,
+"lon": -70.03766,
+"alt": 3331,
+"base": 1831,
+"slug": "cerro-negro-del-tromen"
+},
+{
+"id": "c080",
+"nombre": "Cerro Coyuco",
+"prov": "Neuquén",
+"lat": -36.59385,
+"lon": -70.20405,
+"alt": 3239,
+"base": 1739,
+"slug": "cerro-coyuco"
+},
+{
+"id": "c081",
+"nombre": "Cerro Champaquí",
+"prov": "Córdoba",
+"lat": -31.98805,
+"lon": -64.93638,
+"alt": 2768,
+"base": 1768,
+"slug": "cerro-champaqui"
+},
+{
+"id": "c082",
+"nombre": "Cerro Los Gigantes",
+"prov": "Córdoba",
+"lat": -31.41873,
+"lon": -64.80606,
+"alt": 2334,
+"base": 1334,
+"slug": "cerro-los-gigantes"
+},
+{
+"id": "c083",
+"nombre": "Cerro Blanco",
+"prov": "Córdoba",
+"lat": -32.4366,
+"lon": -64.9195,
+"alt": 2114,
+"base": 1114,
+"slug": "cerro-blanco"
+},
+{
+"id": "c084",
+"nombre": "Cerro Uritorco",
+"prov": "Córdoba",
+"lat": -30.84533,
+"lon": -64.47689,
+"alt": 1949,
+"base": 949,
+"slug": "cerro-uritorco"
+},
+{
+"id": "c085",
+"nombre": "Cerro Horcopaua",
+"prov": "Córdoba",
+"lat": -31.28077,
+"lon": -64.71825,
+"alt": 1805,
+"base": 805,
+"slug": "cerro-horcopaua"
+},
+{
+"id": "c086",
+"nombre": "Cerro Bayo",
+"prov": "Córdoba",
+"lat": -31.2899,
+"lon": -64.89916,
+"alt": 1783,
+"base": 783,
+"slug": "cerro-bayo"
+},
+{
+"id": "c087",
+"nombre": "Cerro Pajarito",
+"prov": "Córdoba",
+"lat": -30.74555,
+"lon": -64.47881,
+"alt": 1642,
+"base": 642,
+"slug": "cerro-pajarito"
+},
+{
+"id": "c088",
+"nombre": "Cerro Piscoro",
+"prov": "Córdoba",
+"lat": -30.83437,
+"lon": -64.3901,
+"alt": 1591,
+"base": 591,
+"slug": "cerro-piscoro"
+},
+{
+"id": "c089",
+"nombre": "Cerro Yerba Buena",
+"prov": "Córdoba",
+"lat": -31.27967,
+"lon": -65.38363,
+"alt": 1577,
+"base": 577,
+"slug": "cerro-yerba-buena"
+},
+{
+"id": "c090",
+"nombre": "Cerro Poca",
+"prov": "Córdoba",
+"lat": -31.30086,
+"lon": -65.25603,
+"alt": 1562,
+"base": 562,
+"slug": "cerro-poca"
+},
+{
+"id": "c091",
+"nombre": "Cerro Cabeza del Indio",
+"prov": "San Luis",
+"lat": -32.31075,
+"lon": -64.94698,
+"alt": 2196,
+"base": 1196,
+"slug": "cerro-cabeza-del-indio"
+},
+{
+"id": "c092",
+"nombre": "Cerro Retama",
+"prov": "San Luis",
+"lat": -33.11818,
+"lon": -66.20974,
+"alt": 2175,
+"base": 1175,
+"slug": "cerro-retama"
+},
+{
+"id": "c093",
+"nombre": "Cerro Guanaco",
+"prov": "San Luis",
+"lat": -33.04011,
+"lon": -66.19574,
+"alt": 2167,
+"base": 1167,
+"slug": "cerro-guanaco"
+},
+{
+"id": "c094",
+"nombre": "Cerro Pantano Negro",
+"prov": "San Luis",
+"lat": -32.83898,
+"lon": -66.22016,
+"alt": 2105,
+"base": 1105,
+"slug": "cerro-pantano-negro"
+},
+{
+"id": "c095",
+"nombre": "Cerro Tomolasta",
+"prov": "San Luis",
+"lat": -32.81113,
+"lon": -66.0764,
+"alt": 2012,
+"base": 1012,
+"slug": "cerro-tomolasta"
+},
+{
+"id": "c096",
+"nombre": "Cerro Toros Muertos",
+"prov": "San Luis",
+"lat": -32.52387,
+"lon": -64.90411,
+"alt": 1940,
+"base": 940,
+"slug": "cerro-toros-muertos"
+},
+{
+"id": "c097",
+"nombre": "Cerro Barroso",
+"prov": "San Luis",
+"lat": -32.93614,
+"lon": -66.23075,
+"alt": 1898,
+"base": 898,
+"slug": "cerro-barroso"
+},
+{
+"id": "c098",
+"nombre": "Cerro Papagayos",
+"prov": "San Luis",
+"lat": -32.70743,
+"lon": -64.93707,
+"alt": 1868,
+"base": 868,
+"slug": "cerro-papagayos"
+},
+{
+"id": "c099",
+"nombre": "Cerro Sololosta",
+"prov": "San Luis",
+"lat": -32.86599,
+"lon": -66.00102,
+"alt": 1763,
+"base": 763,
+"slug": "cerro-sololosta"
+},
+{
+"id": "c100",
+"nombre": "Cerro El Morro",
+"prov": "San Luis",
+"lat": -33.15006,
+"lon": -65.40873,
+"alt": 1702,
+"base": 702,
+"slug": "cerro-el-morro"
+}
+]
