@@ -8,7 +8,7 @@ con colores tipo semáforo. Datos: Open-Meteo, pedidos a la altura real de punto
 import datetime
 from PIL import Image, ImageDraw
 from pronostico import fuente, CORTA
-from perfil_clima import pedir_puntos, marca
+from perfil_clima import pedir_puntos, marca, png
 
 DIAS = 7
 ESC2 = [(-20, (35, 40, 120)), (-10, (45, 85, 200)), (-4, (70, 140, 230)), (0, (150, 210, 245)),
@@ -265,7 +265,7 @@ def semana_png(ruta, D, ahora, destino):
     g.text((x0, y1 + 24), ruta.get('nota_semana') or f"franja = {ruta.get('horas') or '?'} h de recorrido con luz · arriba máx/mín cumbre, abajo largada", font=FS, fill=(150, 150, 150))
     leyendas(g, W, y1 + 46, F, FS)
     g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
-    marca(g_im, (x0, y0, x1, y1)).save(destino, optimize=True)
+    png(marca(g_im, (x0, y0, x1, y1)), destino)
 
 
 def detalle_png(ruta, D, ahora, destino):
@@ -312,7 +312,7 @@ def detalle_png(ruta, D, ahora, destino):
     leyendas(g, W, y + 2, F, FS)
     g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     for c in cajas: im = marca(im, c)
-    im.save(destino, optimize=True)
+    png(im, destino)
 
 
 PUNTOS = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO']
@@ -487,7 +487,7 @@ def dia_png(ruta, D, ahora, k, destino):
     for hh in range(0, 25, 3):
         for yy in range(yb - 2, int(y1 + 58), 4): gc.point((X(hh), yy), fill=(255, 255, 255, 110))
     im = Image.alpha_composite(im.convert('RGBA'), capa).convert('RGB')
-    marca(im, (x0, y0, x1, y1)).save(destino, optimize=True)
+    png(marca(im, (x0, y0, x1, y1)), destino)
 
 
 def altura_hora(ruta, perfil, ahora, carpeta):

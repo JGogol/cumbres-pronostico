@@ -52,6 +52,12 @@ def marca(im, caja):
     return _I.alpha_composite(im.convert('RGBA'), capa).convert('RGB')
 
 
+def png(im, destino):
+    """PNG con paleta de 256 colores: ~60 % menos peso, sin diferencia visible (deploy de Pages más liviano)."""
+    from PIL import Image as _I
+    im.convert('RGB').quantize(colors=256, method=_I.Quantize.MEDIANCUT, dither=_I.Dither.NONE).save(destino, optimize=True)
+
+
 def interp(km, xs, ys):
     if km <= xs[0]: return ys[0]
     for i in range(len(xs) - 1):
