@@ -120,12 +120,21 @@ class Datos:
                 return self.alts[i] + (self.alts[i + 1] - self.alts[i]) * (t0 / (t0 - t1))
         return 'arriba' if c[-1] > 0 else 'abajo'
 
+    def cero_arriba(self, h):
+        """Altura de 0 °C cuando no hiela en la ruta: se extrapola desde la cumbre con el gradiente de la mitad
+        superior del mismo perfil (una sola fuente, sin saltos contra la línea dentro de la ruta)."""
+        al = self.alts; c = [self.T[i][h] for i in range(len(al))]
+        i0 = len(al) // 2
+        g = (c[i0] - c[-1]) / ((al[-1] - al[i0]) or 1)       # °C por metro (positivo = se enfría al subir)
+        g = min(max(g, 0.004), 0.010)
+        return al[-1] + c[-1] / g
+
 
 def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
     """Mapa altura × hora. Si la helada está poco por encima de la cumbre, la escala se estira hacia arriba
     para mostrarla; si está lejos, se indica con un cartel. Devuelve la altura y de la cumbre."""
     a0, cima = D.a0, D.a1
-    arriba = [D.fl[h] for h in range(h0, h1) if D.cero(h) == 'arriba' and D.fl[h]]
+    arriba = [D.cero_arriba(h) for h in range(h0, h1) if D.cero(h) == 'arriba']
     margen = max(800, (cima - a0) * 0.6)
     a1 = cima
     if arriba and max(arriba) <= cima + margen:
@@ -147,7 +156,7 @@ def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
         x = x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0)
         z = D.cero(h)
         if z == 'arriba':
-            if a1 > cima and D.fl[h] and D.fl[h] <= a1: y, est = Y(D.fl[h]), 's'
+            if a1 > cima and D.cero_arriba(h) <= a1: y, est = Y(D.cero_arriba(h)), 's'
             else: prev = None; continue
         elif z == 'abajo': y, est = y1 - 1, 'p'
         else: y, est = Y(z), 's'
