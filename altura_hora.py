@@ -205,7 +205,7 @@ def ejes_altura(g, D, x, y0, y1, FS, cumbre):
 
 
 def semana_png(ruta, D, ahora, destino):
-    W, H = 600, 470
+    W, H = 600, 500
     F, FB, FS = fuente(13), fuente(17, True), fuente(12)
     g_im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(g_im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
@@ -241,7 +241,7 @@ def semana_png(ruta, D, ahora, destino):
     g.text((4, y1 + 5), 'viento', font=FS, fill=(200, 200, 200))
     g.text((x0, y1 + 24), f"franja = {ruta.get('horas') or '?'} h de recorrido con luz · arriba máx/mín cumbre, abajo largada", font=FS, fill=(150, 150, 150))
     leyendas(g, W, y1 + 46, F, FS)
-    g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
+    g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     marca(g_im, (x0, y0, x1, y1)).save(destino, optimize=True)
 
 
@@ -287,7 +287,7 @@ def detalle_png(ruta, D, ahora, destino):
             x = x0 + hh * (x1 - x0) / 24; g.text((x - 6, y1 + 22), f'{hh}h', font=FS, fill=(170, 170, 170))
         y = y1 + 44
     leyendas(g, W, y + 2, F, FS)
-    g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
+    g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     for c in cajas: im = marca(im, c)
     im.save(destino, optimize=True)
 
@@ -377,7 +377,7 @@ def simbolo(g, cx, cy, code, de_noche, s=9):
 
 def dia_png(ruta, D, ahora, k, destino):
     """Un día completo, hora por hora, en toda la ruta."""
-    W, H = 600, 600
+    W, H = 600, 630
     F, FB, FS, FG = fuente(13), fuente(17, True), fuente(12), fuente(22, True)
     im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
@@ -455,7 +455,7 @@ def dia_png(ruta, D, ahora, k, destino):
         g.text((X(hh) - 6, y1 + 62), f'{hh}h', font=FS, fill=(170, 170, 170))
     g.text((x0, y1 + 78), 'Viento y sensación térmica en la cumbre. "Viene del": dirección de la que sopla (útil para orientar la carpa).', font=fuente(11), fill=(150, 150, 150))
     leyendas(g, W, y1 + 98, F, FS)
-    g.text((14, H - 20), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
+    g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
     marca(im, (x0, y0, x1, y1)).save(destino, optimize=True)
 
 

@@ -6,17 +6,18 @@ from perfil_clima import marca
 
 def gif(ruta, d, ahora, destino):
     D = d['daily']; H = d['hourly']; nd = len(D['time'])
-    W, Hh = 600, 360
-    L, R, T, B = 46, W - 20, 146, 250           # área de temperaturas
-    VT, VB = 258, 292                           # franja de ráfagas
+    W, Hh = 600, 452                            # 30 px libres al pie para el rótulo de la galería
+    L, R, T, B = 46, W - 44, 146, 248           # área de temperaturas
+    VT, VB = 262, 352                           # panel de ráfagas con escala propia
+    B_ = B
     tx = [v if v is not None else 0 for v in D['temperature_2m_max']]
     tn = [v if v is not None else 0 for v in D['temperature_2m_min']]
     gu = [v or 0 for v in D['wind_gusts_10m_max']]
     nv = [v or 0 for v in D['snowfall_sum']]; pr = [v or 0 for v in D['precipitation_sum']]
     lo, hi = min(tn) - 3, max(tx) + 3
     ty = lambda t: B - (t - lo) / (hi - lo) * (B - T)
-    gmax = max(100, max(gu))
-    gy = lambda v: VB - v / gmax * (VB - VT)
+    gy = lambda v: VB - min(v, 110) / 110 * (VB - VT)
+    col_v = lambda v: (70, 170, 90) if v < 30 else (225, 190, 60) if v < 60 else (230, 70, 60)
     cw = (R - L) / nd; cx = lambda k: L + cw * (k + 0.5)
     F, FB, FS, FG = fuente(14), fuente(18, True), fuente(12), fuente(30, True)
     lugar = 'Cumbre' if ruta['tipo'] == 'Cumbre' else 'Punto más alto'
@@ -49,14 +50,22 @@ def gif(ruta, d, ahora, destino):
                 g.text((x - 3, ty(tx[k]) - 16), "'", font=FB, fill=tenue((120, 170, 255), f))
             fe = datetime.date.fromisoformat(D['time'][k])
             g.text((x - 6, VB + 5), f"{fe:%d}", font=FS, fill=tenue((180, 180, 180), f))
-        # ráfagas: barritas en franja propia
-        g.text((4, VT + 6), 'ráf.', font=FS, fill=(235, 110, 110))
+        # ráfagas: panel propio con curva y escala a la derecha (0-120 km/h)
+        for a, b_, c in ((0, 30, (40, 70, 48)), (30, 60, (72, 64, 36)), (60, 110, (78, 40, 38))):
+            g.rectangle((L, gy(b_), R, gy(a)), fill=c)
+        for v, c in ((30, (225, 190, 60)), (60, (230, 70, 60)), (90, (230, 70, 60))):
+            y = gy(v)
+            g.line((R, y, R + 4, y), fill=c, width=2); g.text((R + 6, y - 7), f'{v}', font=FS, fill=c)
+        g.text((R + 2, VB - 10), 'km/h', font=fuente(10), fill=(170, 170, 170))
+        g.text((4, VT + 30), 'ráfagas', font=fuente(11), fill=(255, 140, 80)); g.text((4, VT + 44), 'cumbre', font=fuente(11), fill=(170, 170, 170))
+        pts = [(cx(k), gy(gu[k])) for k in range(nd)]
+        g.line(pts, fill=(20, 20, 20), width=5)
+        g.line(pts, fill=(255, 120, 60), width=2)
         for k in range(nd):
-            f = 1 if k < 2 else 0.85 if k < 7 else 0.6
-            c = (235, 80, 80) if gu[k] >= 60 else (200, 150, 150)
-            g.rectangle((cx(k) - cw * 0.22, gy(gu[k]), cx(k) + cw * 0.22, VB), fill=tenue(c, f))
+            x, y = pts[k]; f = 1 if k < 2 else 0.85 if k < 7 else 0.6
+            g.ellipse((x - 4, y - 4, x + 4, y + 4), fill=tenue(col_v(gu[k]), f), outline=(20, 20, 20))
         g.text((14, 8), f"{ruta['nombre'][:30]} · 16 días · {lugar} {ruta['alt']} m", font=FB, fill=(240, 240, 240))
-        g.text((14, Hh - 22), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo",
+        g.text((14, Hh - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo",
                font=FS, fill=(150, 150, 150))
         return marca(im, (L, T, R, VB))
 
