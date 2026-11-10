@@ -43,8 +43,8 @@ def pedir(rutas):
          'hourly': 'freezing_level_height',
          'timezone': TZ, 'forecast_days': 16, 'wind_speed_unit': 'kmh'}
     url = 'https://api.open-meteo.com/v1/forecast?' + urllib.parse.urlencode(q)
-    r = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=120))
-    return r if isinstance(r, list) else [r]
+    from perfil_clima import _pedir
+    return _pedir(url)
 
 
 def color_t(t):
@@ -109,6 +109,24 @@ def dibujar(ruta, d, ahora):
     return im
 
 
+PUBLICADO = 'https://jgogol.github.io/cumbres-pronostico/img'
+
+
+def rescatar(n):
+    """Si una ruta falla, conserva las imágenes de la corrida anterior (ya publicadas)."""
+    nn = f'{n:03d}'; ok = 0
+    nombres = [f'{nn}.png', f'{nn}.gif'] + [f'{nn}/{x}' for x in ['semana.png'] + [f'dia{k}.png' for k in range(1, 8)]]
+    for nom in nombres:
+        destino = os.path.join(SALIDA, nom)
+        if os.path.exists(destino): continue
+        try:
+            b = urllib.request.urlopen(urllib.request.Request(f'{PUBLICADO}/{nom}', headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=30).read()
+            os.makedirs(os.path.dirname(destino), exist_ok=True); open(destino, 'wb').write(b); ok += 1
+        except Exception:
+            pass
+    return f' -> se mantienen {ok} imágenes anteriores'
+
+
 def guardar_historial(n, ahora, datos):
     import gzip
     carpeta = os.path.join(AQUI, 'historial', f'{n:03d}'); os.makedirs(carpeta, exist_ok=True)
@@ -149,9 +167,10 @@ def main():
                                           'precipitacion_max': Dh.lluvia, 'nieve_cumbre': Dh.nieve, 'codigo_tiempo': Dh.wcode}
                 guardar_historial(ruta['n'], ahora, hist)
                 ok += 1
+                time.sleep(0.4)  # no saturar el servicio gratuito
             except Exception:
-                errores.append(f"ruta {ruta['n']}: " + traceback.format_exc())
-        time.sleep(2)
+                errores.append(f"ruta {ruta['n']}: " + traceback.format_exc().strip().splitlines()[-1] + rescatar(ruta['n']))
+        time.sleep(1)
     open(os.path.join(AQUI, 'site', 'log.txt'), 'w', encoding='utf-8').write(
         f'{ahora:%d/%m/%Y %H:%M} · {ok} rutas OK · {len(errores)} errores\n\n' + '\n'.join(errores))
     open(os.path.join(AQUI, 'site', 'index.html'), 'w', encoding='utf-8').write(

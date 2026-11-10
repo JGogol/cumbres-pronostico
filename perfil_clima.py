@@ -16,8 +16,18 @@ def pedir_puntos(pts):
          'daily': 'sunrise,sunset',
          'timezone': TZ, 'forecast_days': DIAS_PRONO, 'wind_speed_unit': 'kmh'}
     url = 'https://api.open-meteo.com/v1/forecast?' + urllib.parse.urlencode(q)
-    r = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=120))
-    return r if isinstance(r, list) else [r]
+    return [*_pedir(url)]
+
+
+def _pedir(url, intentos=4):
+    import time
+    for i in range(intentos):
+        try:
+            r = json.load(urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'cumbres-digitales-pronostico'}), timeout=60))
+            return r if isinstance(r, list) else [r]
+        except Exception:
+            if i == intentos - 1: raise
+            time.sleep(5 * (i + 1))
 
 
 ESC = [(-20, (40, 60, 160)), (-10, (60, 110, 210)), (0, (110, 175, 230)), (8, (120, 200, 170)),
