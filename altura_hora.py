@@ -66,6 +66,7 @@ class Datos:
         self.wcode = [max(x['hourly']['weather_code'][h] or 0 for x in d) for h in range(nh)]
         self.sol = {t: (int(a[11:13]) + int(a[14:16]) / 60, int(b[11:13]) + int(b[14:16]) / 60)
                     for t, a, b in zip(d[-1]['daily']['time'], d[-1]['daily']['sunrise'], d[-1]['daily']['sunset'])}
+        self.fl = [x for x in d[-1]['hourly']['freezing_level_height'][:nh]]
         self.a0, self.a1 = self.alts[0], self.alts[-1]
 
     def nota_hora(self, h):
@@ -121,20 +122,35 @@ class Datos:
 
 
 def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
-    """Mapa altura × hora con la línea de 0 °C siempre visible."""
-    a0, a1 = D.a0, D.a1
+    """Mapa altura × hora. Si la helada está poco por encima de la cumbre, la escala se estira hacia arriba
+    para mostrarla; si está lejos, se indica con un cartel. Devuelve la altura y de la cumbre."""
+    a0, cima = D.a0, D.a1
+    arriba = [D.fl[h] for h in range(h0, h1) if D.cero(h) == 'arriba' and D.fl[h]]
+    margen = max(800, (cima - a0) * 0.6)
+    a1 = cima
+    if arriba and max(arriba) <= cima + margen:
+        a1 = (int(max(arriba)) // 100 + 2) * 100
+    Y = lambda a: y1 - (a - a0) / (a1 - a0) * (y1 - y0)
+    yc = Y(cima)
     for h in range(h0, h1):
         xa = x0 + (h - h0) * (x1 - x0) / (h1 - h0); xb = x0 + (h - h0 + 1) * (x1 - x0) / (h1 - h0)
         for py in range(int(y0), int(y1), px):
             a = a1 - (py - y0) / (y1 - y0) * (a1 - a0)
-            g.rectangle((xa, py, xb, min(py + px, y1)), fill=col(D.temp(h, a)))
+            c = col(D.temp(h, a)) if a <= cima else (46, 49, 58)
+            g.rectangle((xa, py, xb, min(py + px, y1)), fill=c)
+    if a1 > cima:
+        for xx in range(int(x0), int(x1), 4): g.point((xx, yc), fill=(230, 230, 230))
+        g.text((x0 + 6, y0 + 2), 'por encima de la ruta', font=fuente(11), fill=(150, 150, 160))
+    # línea de 0 °C: altura real (dentro de la ruta o en la zona de arriba)
     prev = None
     for h in range(h0, h1):
         x = x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0)
         z = D.cero(h)
-        if z == 'arriba': y, est = y0 + 1, 'p'
+        if z == 'arriba':
+            if a1 > cima and D.fl[h] and D.fl[h] <= a1: y, est = Y(D.fl[h]), 's'
+            else: prev = None; continue
         elif z == 'abajo': y, est = y1 - 1, 'p'
-        else: y, est = y1 - (z - a0) / (a1 - a0) * (y1 - y0), 's'
+        else: y, est = Y(z), 's'
         if prev:
             if est == 's' and prev[2] == 's': g.line((prev[0], prev[1], x, y), fill=(255, 255, 255), width=2)
             else:
@@ -143,6 +159,11 @@ def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
                     xb = prev[0] + (x - prev[0]) * (t + 0.3); yb = prev[1] + (y - prev[1]) * (t + 0.3)
                     g.line((xa, ya, xb, yb), fill=(255, 255, 255), width=2)
         prev = (x, y, est)
+    if arriba and a1 == cima:
+        t = f'❄ hiela recién a {round(min(arriba), -2):.0f} m'.replace('❄ ', '')
+        tw = g.textlength(t, font=fuente(12)); xx = x1 - tw - 8
+        g.rectangle((xx - 4, y0 + 2, x1 - 4, y0 + 18), fill=(30, 34, 44))
+        g.text((xx, y0 + 3), t, font=fuente(12), fill=(170, 215, 255))
     # curva de ráfagas en la cumbre con escala propia a la derecha (0-100 km/h)
     vy = lambda v: y1 - min(v, 100) / 100 * (y1 - y0)
     pts = [(x0 + (h - h0 + 0.5) * (x1 - x0) / (h1 - h0), vy(D.raf[h])) for h in range(h0, h1)]
@@ -156,14 +177,15 @@ def panel(g, D, x0, y0, x1, y1, h0, h1, px=3):
     # escala de altura: guías cada 250 m
     paso = 250 if a1 - a0 <= 2000 else 500
     for a in range((int(a0) // paso + 1) * paso, int(a1), paso):
-        y = y1 - (a - a0) / (a1 - a0) * (y1 - y0)
-        cerca = min(a - a0, a1 - a) < (a1 - a0) * 0.09
+        y = Y(a)
+        cerca = min(a - a0, abs(cima - a), a1 - a) < (a1 - a0) * 0.09
         for xx in range(int(x0), int(x1), 6): g.point((xx, y), fill=(255, 255, 255))
         g.line((x0 - 4, y, x0, y), fill=(200, 200, 200))
         if not cerca: g.text((x0 - 32, y - 7), f'{a}', font=fuente(11), fill=(170, 170, 170))
     for h in range(h0 + 1, h1):
         if D.horas[h][11:13] == '00':
             x = x0 + (h - h0) * (x1 - x0) / (h1 - h0); g.line((x, y0, x, y1 + 18), fill=(25, 25, 25), width=2)
+    return yc
 
 
 def franja_viento(g, D, x0, y0, x1, h0, h1, F, numeros_cada=None):
@@ -178,7 +200,7 @@ def franja_viento(g, D, x0, y0, x1, h0, h1, F, numeros_cada=None):
 
 
 def leyendas(g, W, y, F, FS):
-    g.text((14, y), '— 0 °C (punteada: no hiela en la ruta)', font=FS, fill=(230, 230, 230))
+    g.text((14, y), '— 0 °C: desde qué altura hiela', font=FS, fill=(230, 230, 230))
     g.line((262, y + 7, 290, y + 7), fill=(255, 120, 60), width=3)
     g.text((296, y), 'ráfagas en la cumbre (escala derecha, km/h)', font=FS, fill=(255, 150, 100))
     y += 18; x = 14
@@ -199,8 +221,9 @@ def leyendas(g, W, y, F, FS):
         xx = LX0 + (t + 20) / 50 * (LX1 - LX0); g.text((xx - 8, y2 + 10), f'{t}°', font=FS, fill=(160, 160, 160))
 
 
-def ejes_altura(g, D, x, y0, y1, FS, cumbre):
-    g.text((x, y0), f'{D.a1}', font=FS, fill=(210, 210, 210)); g.text((x, y0 + 13), cumbre, font=FS, fill=(140, 140, 140))
+def ejes_altura(g, D, x, y0, y1, FS, cumbre, yc=None):
+    yc = y0 if yc is None else yc
+    g.text((x, yc - (6 if yc > y0 + 6 else 0)), f'{D.a1}', font=FS, fill=(210, 210, 210)); g.text((x, yc + 7), cumbre, font=FS, fill=(140, 140, 140))
     g.text((x, y1 - 26), 'largada', font=FS, fill=(140, 140, 140)); g.text((x, y1 - 13), f'{D.a0}', font=FS, fill=(210, 210, 210))
 
 
@@ -213,8 +236,8 @@ def semana_png(ruta, D, ahora, destino):
     g.text((14, 30), 'Próximos 7 días en toda la ruta · condiciones pronosticadas en la mejor franja de luz', font=FS, fill=(170, 170, 170))
     x0, x1, y0, y1 = 58, W - 34, 118, 308
     nh = len(D.horas)
-    panel(g, D, x0, y0, x1, y1, 0, nh, 3)
-    ejes_altura(g, D, 4, y0, y1, FS, cumbre)
+    yc = panel(g, D, x0, y0, x1, y1, 0, nh, 3)
+    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc)
     fechas = sorted({h[:10] for h in D.horas})[:DIAS]
     cw = (x1 - x0) / DIAS
     for i, fe in enumerate(fechas):
@@ -277,7 +300,7 @@ def detalle_png(ruta, D, ahora, destino):
         ejes_altura(g, D, 4, y0, y1, FS, cumbre)
         for hh in range(1, 24, 3):
             h = h0 + hh; x = x0 + (hh + 0.5) * (x1 - x0) / 24
-            for i, yy in ((len(D.alts) - 1, y0 + 4), (0, y1 - 18)):
+            for i, yy in ((len(D.alts) - 1, yc + 4), (0, y1 - 18)):
                 t = D.T[i][h]; s = f'{round(t)}°'
                 g.text((x - g.textlength(s, font=F) / 2, yy), s, font=F, fill=(15, 15, 15) if t > -4 else (240, 240, 240))
             if D.nieve[h] >= 0.1: g.text((x - 4, y0 + 20), '*', font=FB, fill=(255, 255, 255))
@@ -377,7 +400,7 @@ def simbolo(g, cx, cy, code, de_noche, s=9):
 
 def dia_png(ruta, D, ahora, k, destino):
     """Un día completo, hora por hora, en toda la ruta."""
-    W, H = 600, 630
+    W, H = 600, 648
     F, FB, FS, FG = fuente(13), fuente(17, True), fuente(12), fuente(22, True)
     im = Image.new('RGB', (W, H), (30, 30, 30)); g = ImageDraw.Draw(im)
     cumbre = 'cumbre' if ruta['tipo'] == 'Cumbre' else 'p. alto'
@@ -408,19 +431,21 @@ def dia_png(ruta, D, ahora, k, destino):
     x0, x1 = 58, W - 34
     X = lambda hh: x0 + hh * (x1 - x0) / 24
     # fila 1: calificación por hora
-    yb = 160
+    yb = 178
+    for hh in (0, 3, 6, 9, 12, 15, 18, 21):
+        g.text((X(hh) - 6, yb - 17), f'{hh}h', font=FS, fill=(170, 170, 170))
     g.text((4, yb - 1), 'condic.', font=fuente(11), fill=(170, 170, 170))
     for hh in range(24): g.rectangle((X(hh), yb, X(hh + 1) - 1, yb + 10), fill=NOTAS[D.nota_hora(h0 + hh)][1])
     if mf: g.rectangle((X(mf[1]), yb - 2, X(mf[2]), yb + 12), outline=(255, 255, 255), width=2)
     # fila 2: símbolos del tiempo
-    ys = 188
+    ys = 206
     g.text((4, ys - 6), 'tiempo', font=fuente(11), fill=(170, 170, 170))
     for hh in range(24):
         noche = hh + 0.5 < sale or hh + 0.5 > pone
         if noche: g.rectangle((X(hh), ys - 12, X(hh + 1), ys + 14), fill=(26, 28, 34))
         simbolo(g, (X(hh) + X(hh + 1)) / 2, ys, D.wcode[h0 + hh], noche, 7)
     # fila 3: precipitación (mm/h, barras)
-    yp0, yp1 = 208, 228
+    yp0, yp1 = 226, 246
     g.text((4, yp0 + 3), 'precip.', font=fuente(11), fill=(170, 170, 170))
     g.rectangle((x0, yp0, x1, yp1), fill=(38, 40, 46))
     for hh in range(24):
@@ -431,12 +456,12 @@ def dia_png(ruta, D, ahora, k, destino):
             g.rectangle((X(hh) + 2, yp1 - alto, X(hh + 1) - 2, yp1), fill=c)
             if mm >= 0.5: g.text((X(hh) + 1, yp0 - 1), f'{mm:.0f}', font=fuente(10), fill=(220, 230, 255))
     # panel principal: temperatura por altura, 0 °C y ráfagas
-    y0, y1 = 242, 392
-    panel(g, D, x0, y0, x1, y1, h0, h1, 3)
-    ejes_altura(g, D, 4, y0, y1, FS, cumbre)
+    y0, y1 = 260, 410
+    yc = panel(g, D, x0, y0, x1, y1, h0, h1, 3)
+    ejes_altura(g, D, 4, y0, y1, FS, cumbre, yc)
     for hh in range(1, 24, 3):
         h = h0 + hh; x = (X(hh) + X(hh + 1)) / 2
-        for i, yy in ((len(D.alts) - 1, y0 + 4), (0, y1 - 18)):
+        for i, yy in ((len(D.alts) - 1, yc + 4), (0, y1 - 18)):
             t = D.T[i][h]; tx = f'{round(t)}°'
             g.text((x - g.textlength(tx, font=F) / 2, yy), tx, font=F, fill=(15, 15, 15) if t > -4 else (240, 240, 240))
     franja_viento(g, D, x0, y1 + 4, x1, h0, h1, FS)
@@ -456,6 +481,12 @@ def dia_png(ruta, D, ahora, k, destino):
     g.text((x0, y1 + 78), 'Viento y sensación térmica en la cumbre. "Viene del": dirección de la que sopla (útil para orientar la carpa).', font=fuente(11), fill=(150, 150, 150))
     leyendas(g, W, y1 + 98, F, FS)
     g.text((14, H - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo", font=FS, fill=(150, 150, 150))
+    # guías verticales cada 3 h que cruzan todas las filas, y banda suave de la mejor franja
+    capa = Image.new('RGBA', im.size, (0, 0, 0, 0)); gc = ImageDraw.Draw(capa)
+    if mf: gc.rectangle((X(mf[1]), yb - 3, X(mf[2]), y1 + 58), fill=(255, 255, 255, 34), outline=(255, 255, 255, 120))
+    for hh in range(0, 25, 3):
+        for yy in range(yb - 2, int(y1 + 58), 4): gc.point((X(hh), yy), fill=(255, 255, 255, 110))
+    im = Image.alpha_composite(im.convert('RGBA'), capa).convert('RGB')
     marca(im, (x0, y0, x1, y1)).save(destino, optimize=True)
 
 
