@@ -41,13 +41,13 @@
 },
 {
 "id": "c005",
-"nombre": "Cerro Sarapo",
+"nombre": "Cerro Acay",
 "prov": "Salta",
-"lat": -10.30412,
-"lon": -76.89466,
-"alt": 6127,
-"base": 3627,
-"slug": "cerro-sarapo"
+"lat": -24.41667,
+"lon": -66.16083,
+"alt": 5770,
+"base": 3270,
+"slug": "cerro-acay"
 },
 {
 "id": "c006",
