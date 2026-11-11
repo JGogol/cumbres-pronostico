@@ -4,11 +4,77 @@ from PIL import Image, ImageDraw
 from pronostico import fuente, color_t, tenue, CORTA, WMO
 from perfil_clima import marca
 
+def tipo_tiempo(code, nieve, lluvia, tmax=99):
+    """Fenómeno principal del día para el ícono (código OMM de Open-Meteo + montos).
+    Coherente con el texto del encabezado: si la máxima no pasa de 1 °C, lo que cae es nieve."""
+    c = code or 0
+    if c in (96, 99): return 'granizo'
+    if c >= 95: return 'tormenta'
+    precip = c in (51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82) or lluvia >= 0.5
+    if nieve >= 0.5 or c in (71, 73, 75, 77, 85, 86) or (precip and tmax <= 1): return 'nieve'
+    if c in (61, 63, 65, 66, 67, 80, 81, 82): return 'lluvia'
+    if c in (51, 53, 55, 56, 57): return 'llovizna'
+    if lluvia >= 2: return 'lluvia'
+    if lluvia >= 0.5: return 'llovizna'
+    if c in (45, 48): return 'niebla'
+    if c == 3: return 'nublado'
+    if c == 2: return 'parcial'
+    return 'sol'
+
+
+def icono(g, x, y, tipo, f):
+    """Ícono vectorial de ~22x20 px centrado en x, con su parte alta en y (sin emojis: GitHub no tiene fuentes de color)."""
+    from pronostico import tenue as tn_
+    AM, NU, NO, AG, BL = (245, 200, 70), (175, 180, 190), (120, 125, 135), (110, 170, 255), (225, 240, 255)
+    c = lambda col: tn_(col, f)
+
+    def sol(cx_, cy_, r):
+        for i in range(8):
+            import math
+            a = i * math.pi / 4
+            g.line((cx_ + math.cos(a) * (r + 2), cy_ + math.sin(a) * (r + 2), cx_ + math.cos(a) * (r + 5), cy_ + math.sin(a) * (r + 5)), fill=c(AM), width=2)
+        g.ellipse((cx_ - r, cy_ - r, cx_ + r, cy_ + r), fill=c(AM))
+
+    def nube(cx_, cy_, col):
+        g.ellipse((cx_ - 10, cy_ - 2, cx_ - 1, cy_ + 6), fill=c(col))
+        g.ellipse((cx_ - 5, cy_ - 7, cx_ + 6, cy_ + 4), fill=c(col))
+        g.ellipse((cx_ + 1, cy_ - 3, cx_ + 10, cy_ + 6), fill=c(col))
+        g.rectangle((cx_ - 6, cy_ + 1, cx_ + 6, cy_ + 6), fill=c(col))
+
+    if tipo == 'sol':
+        sol(x, y + 10, 5)
+    elif tipo == 'parcial':
+        sol(x - 4, y + 7, 4); nube(x + 2, y + 11, NU)
+    elif tipo == 'nublado':
+        nube(x, y + 9, NU)
+    elif tipo == 'niebla':
+        for i, dx in enumerate((0, 3, -2)):
+            g.line((x - 9 + dx, y + 5 + i * 5, x + 9 + dx, y + 5 + i * 5), fill=c(NU), width=2)
+    elif tipo in ('llovizna', 'lluvia'):
+        nube(x, y + 6, NO)
+        if tipo == 'lluvia':
+            for dx in (-6, 0, 6):
+                g.line((x + dx, y + 14, x + dx - 2, y + 20), fill=c(AG), width=2)
+        else:
+            for dx, dy in ((-5, 15), (1, 18), (6, 15)):
+                g.ellipse((x + dx - 1, y + dy - 1, x + dx + 1, y + dy + 1), fill=c(AG))
+    elif tipo == 'nieve':
+        for a, b in (((0, -9), (0, 9)), ((-8, -5), (8, 5)), ((-8, 5), (8, -5))):
+            g.line((x + a[0], y + 10 + a[1], x + b[0], y + 10 + b[1]), fill=c(BL), width=2)
+    elif tipo in ('tormenta', 'granizo'):
+        nube(x, y + 6, NO)
+        g.polygon([(x + 1, y + 11), (x - 4, y + 17), (x, y + 17), (x - 2, y + 22), (x + 4, y + 15), (x, y + 15)], fill=c(AM))
+        if tipo == 'granizo':
+            for dx in (-7, 7):
+                g.ellipse((x + dx - 2, y + 15, x + dx + 2, y + 19), fill=c(BL))
+
+
 def gif(ruta, d, ahora, destino):
     D = d['daily']; H = d['hourly']; nd = len(D['time'])
-    W, Hh = 600, 452                            # 30 px libres al pie para el rótulo de la galería
+    W, Hh = 600, 486                            # 30 px libres al pie para el rótulo de la galería
     L, R, T, B = 46, W - 44, 146, 248           # área de temperaturas
-    VT, VB = 262, 352                           # panel de ráfagas con escala propia
+    IT = B + 8                                  # fila de íconos del tiempo (y montos de lluvia/nieve)
+    VT, VB = 296, 386                           # panel de ráfagas con escala propia
     B_ = B
     tx = [v if v is not None else 0 for v in D['temperature_2m_max']]
     tn = [v if v is not None else 0 for v in D['temperature_2m_min']]
@@ -44,10 +110,12 @@ def gif(ruta, d, ahora, destino):
             f = 1 if k < 2 else 0.85 if k < 7 else 0.6
             x = cx(k)
             g.rounded_rectangle((x - cw * 0.28, ty(tx[k]), x + cw * 0.28, ty(tn[k])), radius=4, fill=tenue(color_t((tx[k] + tn[k]) / 2), f))
-            if nv[k] >= 0.5:
-                g.text((x - 4, ty(tx[k]) - 18), '*', font=FB, fill=tenue((190, 225, 255), f))
-            elif pr[k] >= 0.5:
-                g.text((x - 3, ty(tx[k]) - 16), "'", font=FB, fill=tenue((120, 170, 255), f))
+            tp = tipo_tiempo(D['weather_code'][k], nv[k], pr[k], tx[k])
+            icono(g, x, IT, tp, f)
+            if nv[k] >= 0.5 or (pr[k] >= 1 and tp != 'nieve'):
+                m = f"{nv[k]:.0f}cm" if nv[k] >= 0.5 else f"{pr[k]:.0f}mm"
+                fm = fuente(10); g.text((x - g.textlength(m, font=fm) / 2, IT + 23), m, font=fm,
+                                        fill=tenue((190, 225, 255) if nv[k] >= 0.5 else (130, 180, 255), f))
             fe = datetime.date.fromisoformat(D['time'][k])
             g.text((x - 6, VB + 5), f"{fe:%d}", font=FS, fill=tenue((180, 180, 180), f))
         # ráfagas: panel propio con curva y escala a la derecha (0-120 km/h)
@@ -67,7 +135,7 @@ def gif(ruta, d, ahora, destino):
         g.text((14, 8), f"{ruta['nombre'][:30]} · 16 días · {lugar} {ruta['alt']} m", font=FB, fill=(240, 240, 240))
         g.text((14, Hh - 50), f"cumbresdigitales.wordpress.com · Open-Meteo · actualizado {ahora:%d/%m %H:%M} · orientativo",
                font=FS, fill=(150, 150, 150))
-        return marca(im, (L, T, R, VB))
+        return marca(im, (L, VT - 40, R, VB))     # sobre el panel de ráfagas, sin tapar los íconos
 
     frames, dur = [], []
     fondo = base()
