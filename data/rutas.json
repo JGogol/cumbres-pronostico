@@ -1348,5 +1348,15 @@
   "tipo": "Cumbre",
   "horas": null,
   "varios_dias": false
+ },
+ {
+  "n": 136,
+  "nombre": "Cerro de la Virgen – Chos Malal 11k",
+  "lat": -37.3618,
+  "lon": -70.2912,
+  "alt": 1100,
+  "tipo": "Cumbre",
+  "horas": 1.1,
+  "varios_dias": false
  }
 ]
