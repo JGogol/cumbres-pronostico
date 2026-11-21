@@ -1338,5 +1338,15 @@
   "tipo": "Punto más alto",
   "horas": 2.4,
   "varios_dias": false
+ },
+ {
+  "n": 135,
+  "nombre": "Cerro Mirador – Malargüe 5k",
+  "lat": -35.4968,
+  "lon": -69.7583,
+  "alt": 1978,
+  "tipo": "Cumbre",
+  "horas": null,
+  "varios_dias": false
  }
 ]
